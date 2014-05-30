@@ -2,19 +2,19 @@ package Presentacio;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
-public class GestioContracte extends JFrame {
+public class GestioMaquina extends JFrame {
 
 	private JPanel contentPane;
 	private JComboBox comboBox;
@@ -22,8 +22,8 @@ public class GestioContracte extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GestioContracte() {
-		setTitle("Gestió Contracte");
+	public GestioMaquina() {
+		setTitle("Gestió Màquina");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -42,7 +42,7 @@ public class GestioContracte extends JFrame {
 
 		comboBox = new JComboBox<String>();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {
-				"Nou contracte", "Modificar contracte", "Anul·lar contracte" }));
+				"Nova Màquina", "Revisar Màquina", "Remuntar Màquina" }));
 		comboBox.setSelectedIndex(0);
 		comboBox.setToolTipText("");
 		comboBox.setMaximumRowCount(3);
@@ -58,7 +58,7 @@ public class GestioContracte extends JFrame {
 		btnOk.setBounds(172, 134, 89, 23);
 		contentPane.add(btnOk);
 
-		JLabel lblGestiContracte = new JLabel("Gestió Contracte");
+		JLabel lblGestiContracte = new JLabel("Gestió Màquina");
 		lblGestiContracte.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblGestiContracte.setBounds(147, 32, 175, 14);
 		contentPane.add(lblGestiContracte);
@@ -66,17 +66,17 @@ public class GestioContracte extends JFrame {
 	
 	public void canviarPantalla(){
 		if (comboBox.getSelectedIndex() == 0) {
-			NouContracte nou = new NouContracte();
-			nou.setVisible(true);	
+			NovaMaquina nova = new NovaMaquina();
+			nova.setVisible(true);	
 			this.dispose();
 		} else {
 			if (comboBox.getSelectedIndex() == 1) {
-				ModificarContracte modificar = new ModificarContracte();
-				modificar.setVisible(true);
+				RevisarMaquina revisar = new RevisarMaquina();
+				revisar.setVisible(true);
 				this.dispose();
 			} else {
-				AnularContracte anular = new AnularContracte();
-				anular.setVisible(true);
+				RemuntarMaquina remuntar= new RemuntarMaquina();
+				remuntar.setVisible(true);
 				this.dispose();
 			}
 		}
@@ -87,4 +87,5 @@ public class GestioContracte extends JFrame {
 		principal.setVisible(true);
 		this.dispose();
 	}
+
 }

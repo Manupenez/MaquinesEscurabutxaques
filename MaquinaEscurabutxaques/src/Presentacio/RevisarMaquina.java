@@ -10,21 +10,21 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class ModificarContracte extends JFrame {
+public class RevisarMaquina extends JFrame {
 
 	private JPanel contentPane;
 
-	
+
 	/**
 	 * Create the frame.
 	 */
-	public ModificarContracte() {
-		setTitle("Modificar Contracte");
+	public RevisarMaquina() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
 		JButton btnCancellar = new JButton("Cancel·lar");
 		btnCancellar.addActionListener(new ActionListener() {
@@ -32,17 +32,18 @@ public class ModificarContracte extends JFrame {
 				tornarEnrere();
 			}
 		});
+
 		contentPane.setLayout(null);
-		btnCancellar.setBounds(304, 228, 120, 23);
+		btnCancellar.setBounds(300, 228, 124, 23);
 		contentPane.add(btnCancellar);
+		
 	}
-	
+
 	public void tornarEnrere(){
-		GestioContracte gestio = new GestioContracte();
-		gestio.setVisible(true);
+		PantallaPrincipal principal = new PantallaPrincipal();
+		principal.setVisible(true);
 		this.dispose();
 	}
+
 	
-
 }
-

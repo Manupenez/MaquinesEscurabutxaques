@@ -37,14 +37,14 @@ public class PantallaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaPrincipal() {
-		setTitle("M\u00E0quina Escurabutxaques");
+		setTitle("Màquina Escurabutxaques");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		JButton btnOk = new JButton("OK");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -53,18 +53,20 @@ public class PantallaPrincipal extends JFrame {
 		});
 		btnOk.setBounds(166, 142, 89, 23);
 		contentPane.add(btnOk);
-		
+
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Gestió màquina", "Gestió reparacions", "Gestió contrcate", "Gestió recaptacions"}));
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {
+				"Gestió màquina", "Gestió reparacions", "Gestió contrcate",
+				"Gestió recaptacions" }));
 		comboBox.setSelectedIndex(0);
 		comboBox.setBounds(106, 78, 218, 20);
 		contentPane.add(comboBox);
 	}
-	
-	public void canviarPantalla(){
+
+	public void canviarPantalla() {
 		if (comboBox.getSelectedIndex() == 0) {
-			PantallaInicial inicial = new PantallaInicial();
-			inicial.setVisible(true);	
+			GestioMaquina maquina = new GestioMaquina();
+			maquina.setVisible(true);
 			this.dispose();
 		} else {
 			if (comboBox.getSelectedIndex() == 2) {
@@ -72,9 +74,9 @@ public class PantallaPrincipal extends JFrame {
 				contracte.setVisible(true);
 				this.dispose();
 			} else {
-				
+
 			}
 		}
-	}
 
+	}
 }
