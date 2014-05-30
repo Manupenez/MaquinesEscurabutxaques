@@ -4,28 +4,27 @@ import java.util.Date;
 
 public class Reparacio {
 	
-	private Date data;
+	private Date dataIniciReparacio;
 	private String estat;
+	private Maquina maquina;
 	private int idReparacio;
 	private Tecnic tecnic;
-	private Maquina maquina;
 	private final String perReperar="PER REPARAR";
 	private final String finalitzada="FINALITZADA";
 	
-	public Reparacio (Maquina maquina){		
-		this.data = new Date();
+	public Reparacio (Maquina maquina, Tecnic tecnic, Date data){		
+		this.dataIniciReparacio = data;
 		this.estat = this.perReperar;		
-		this.maquina = maquina;		
+		this.maquina = maquina;	
+		this.tecnic=tecnic;
 	}
 	public Reparacio(Date data,String estat, int idReparacio, Tecnic tecnic, Maquina maquina){
-		this(maquina);
+		this(maquina,tecnic,data);
 		this.idReparacio = idReparacio;	
-		this.data = data;
-		this.tecnic = tecnic;
 	}
 
 	public Date getData() {
-		return data;
+		return dataIniciReparacio;
 	}
 
 	public String getEstat() {

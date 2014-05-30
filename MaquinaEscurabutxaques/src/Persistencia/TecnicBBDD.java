@@ -86,5 +86,29 @@ public class TecnicBBDD {
 			throw new Exception("Error crearTecnic - " + e.getMessage());
 		}
 	}
+	public Tecnic getTecnicMenysReparacionsZona(Zona zona) throws Exception {
+		try{
+			PreparedStatement pst = connexio.prepareStatement("select idtecnic,NOMTECNIC "
+					+ "from (select t.idtecnic,t.NOMTECNIC, count(r.idtecnic)"
+					+ "from tecnic t left join REPARACIO r on (t.idtecnic = r.idtecnic)"
+					+ "where nomZona = ?"
+					+ "GROUP BY t.IDTECNIC, t.NOMTECNIC"
+					+ "order by count(r.idtecnic))"
+					+ "where rownum=1");
+			pst.clearParameters();
+			pst.setString(1, zona.getNomZona());
+			ResultSet rs;
+			rs = pst.executeQuery();
+			if (rs.next()) {				
+				return this.recuperarTecnic(rs.getInt("idtecnic"));
+			} else {
+				throw new Exception("Error no Trobem el Tecnic");
+			}
+		}catch(Exception e){
+			throw new Exception(""+e.getMessage());
+		}
+		
+		
+	}
 
 }

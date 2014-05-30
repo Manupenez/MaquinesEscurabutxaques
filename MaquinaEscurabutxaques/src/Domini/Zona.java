@@ -8,4 +8,7 @@ public class Zona {
 	public Zona (String nom){
 		this.nom=nom;
 	}
+	public String getNomZona(){
+		return this.nom;
+	}
 }
