@@ -16,6 +16,11 @@ public class ControladorReparador {
 	private MaquinaBBDD maquinaBBDD;
 	private ReparacioBBDD reparacioBBDD;
 	// Mètode que retorna maquines que estan per reperar
+	
+	public ControladorReparador() throws Exception{
+		this.maquinaBBDD = new MaquinaBBDD();
+		this.reparacioBBDD = new ReparacioBBDD ();
+	}
 	public LinkedList<Integer> obtenirMaquinesPerReparar() throws Exception {
 		try {
 			return maquinaBBDD.obtenirMaquines("ESPATLLADA");

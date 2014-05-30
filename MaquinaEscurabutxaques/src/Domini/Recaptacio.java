@@ -5,29 +5,47 @@ import java.util.Date;
 public class Recaptacio {
 	private Maquina maquina;
 	private Contracte contracte;
-	private int recaptacio;
-	public Date data;
+	private int dinersMaquina;
+	private Date data;
 	
-	public Recaptacio(Maquina maquina, Contracte contracte, int recaptacio, Date data){
+	public Recaptacio(Maquina maquina, Contracte contracte, int dinersMaquina){
 		this.maquina=maquina;
 		this.contracte=contracte;
-		this.recaptacio=recaptacio;
-		this.data=data;
-	}
+		this.dinersMaquina=dinersMaquina;
+		this.data= new Date();
+}
 	
-	public String generarInforme(int dinersRecullits){
-		String informe;
-		int dinersClient=this.contracte.getPercentatge();
+	public String generarInforme(){
+		String informe;		
+		int pagamentClient=this.contracte.getPercentatge();
 		String client= this.contracte.getTipusComerc();
 		if(client == "minorista"){
-			informe= ("El contracte: "+this.contracte.getId() + "d'un minorista. Ha rebut "+dinersClient
-					+"hi la màquina ha recullit: "+dinersRecullits);
+			informe= ("El contracte: "+this.contracte.getId() + "és d'un minorista. Li hem pagat "+pagamentClient
+					+"hi la màquina ha recullit: "+dinersMaquina);
 		}
 		else{
-			dinersClient= dinersClient*dinersRecullits/100;
-			informe= ("El contracte: "+this.contracte.getId() + "d'un majorista. Ha rebut "+dinersClient
-					+"hi la màquina ens ha donat de benefici: "+(dinersRecullits-dinersClient));
+			pagamentClient= pagamentClient*dinersMaquina/100;
+			informe= ("El contracte: "+this.contracte.getId() + "és d'un majorista. Ha recollit "+pagamentClient
+					+"hi la màquina ens ha donat de benefici: "+(dinersMaquina-pagamentClient));
 		}
 		return informe;
 	}
+
+	
+	public int getIdMaquina() {
+		return maquina.getId();
+	}
+
+	public int getIdContracte() {
+		return contracte.getId();
+	}
+
+	public int getDinersMaquina() {
+		return dinersMaquina;
+	}
+
+	public Date getData() {
+		return data;
+	}
+	
 }

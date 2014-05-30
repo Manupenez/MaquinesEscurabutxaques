@@ -10,8 +10,7 @@ public class Contracte {
 
 	public Contracte(String infoContracte, Date dataA, int id) {
 		this.infoContracte = infoContracte;
-		this.dataAlta = dataA;
-		
+		this.dataAlta = dataA;	
 		this.id = id;
 
 	}
