@@ -9,7 +9,7 @@ import Persistencia.ContracteBBDD;
 import Persistencia.ComercBBDD;
 import Persistencia.LineaContracteBBDD;
 import Persistencia.MaquinaBBDD;
-
+//
 public class ControladorContracte {
 
 	private Contracte contracte;
