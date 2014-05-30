@@ -128,7 +128,7 @@ public class NovaMaquina extends JFrame {
 				}
 				if (tecnics.isEmpty()) {
 					tirarError("No hi ha tècnics disponibles.");
-				}
+				}				
 			} else {
 				btnAcceptar.setEnabled(true);
 				modelTecnics = new DefaultListModel();
