@@ -30,7 +30,7 @@ public class NovaMaquina extends JFrame {
 	private JList listCarcassa;
 	private JList listPlaca;
 	private JButton btnAcceptar;
-
+//manu
 	/**
 	 * Create the frame.
 	 */
