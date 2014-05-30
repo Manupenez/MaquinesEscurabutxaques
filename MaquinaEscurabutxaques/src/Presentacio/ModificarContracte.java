@@ -26,7 +26,7 @@ public class ModificarContracte extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		
-		JButton btnCancellar = new JButton("Cancel\u00B7lar");
+		JButton btnCancellar = new JButton("Cancel·lar");
 		btnCancellar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tornarEnrere();

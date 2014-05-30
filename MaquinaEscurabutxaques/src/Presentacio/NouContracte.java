@@ -53,7 +53,7 @@ public class NouContracte extends JFrame {
 			tirarError(e.getMessage());
 		}
 		maquinesXContracte = new LinkedList<Integer>();
-		JButton btnCancellar = new JButton("Cancel\u00B7lar");
+		JButton btnCancellar = new JButton("Cancel·lar");
 		btnCancellar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tornarEnrere();

@@ -23,7 +23,7 @@ public class GestioContracte extends JFrame {
 	 * Create the frame.
 	 */
 	public GestioContracte() {
-		setTitle("Gesti� Contracte");
+		setTitle("Gestió Contracte");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -58,7 +58,7 @@ public class GestioContracte extends JFrame {
 		btnOk.setBounds(172, 134, 89, 23);
 		contentPane.add(btnOk);
 
-		JLabel lblGestiContracte = new JLabel("Gesti� Contracte");
+		JLabel lblGestiContracte = new JLabel("Gestió Contracte");
 		lblGestiContracte.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblGestiContracte.setBounds(147, 32, 175, 14);
 		contentPane.add(lblGestiContracte);
