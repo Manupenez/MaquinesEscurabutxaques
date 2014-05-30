@@ -1,0 +1,16 @@
+ Per ACCESS:                
+    DriverManager.registerDriver(new sun.jdbc.odbc.JdbcOdbcDriver());
+    Connection con = DriverManager.getConnection("jdbc:odbc:Nom DNS del ODBC");
+                
+ 
+
+Per MYSQL:
+   Class.forName("org.gjt.mm.mysql.Driver");
+   //alternativament: "com.mysql.jdbc.Driver"
+   Connection con = DriverManager.getConnection("jdbc:mysql://localhost/Nom BBDD", "el login", "la password");
+
+               
+Per ORACLE:
+  DriverManager.registerDriver(new oracle.jdbc.driver.OracleDriver());
+  Connectioncon = DriverManager.getConnection("jdbc:oracle:thin:@rama.eupmt.es:1521:LOGO10", "el username o esquema", "la password");
+                    
