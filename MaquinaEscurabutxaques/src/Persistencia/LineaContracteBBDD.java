@@ -1,5 +1,6 @@
 package Persistencia;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.LinkedList;
@@ -22,10 +23,12 @@ public class LineaContracteBBDD {
 	public void inserirlineaContracte(Contracte cont, Maquina maquina)
 			throws Exception {
 		try {
-			String sql = "INSERT INTO lineaContracte(idcontracte, idmaquina) VALUES(?,?)";
+			String sql = "INSERT INTO lineaContracte(idcontracte, idmaquina, dataalta) VALUES(?,?,?)";
 			PreparedStatement pst = connexio.prepareStatement(sql);
 			pst.setInt(1, cont.getId());
 			pst.setInt(2, maquina.getId());
+			long data = cont.getDataAlta().getTime();
+			pst.setDate(3, new Date(data));
 			if (pst.executeUpdate() != 1) {
 				throw new Exception("lineaContracte inserida incorrectament");
 			}
@@ -48,11 +51,13 @@ public class LineaContracteBBDD {
 			while (rs.next()) {
 				llista.add(rs.getInt("idMaquina"));
 			}
-			String sql2 = "DELETE FROM LineaContracte WHERE idContracte = ?";
-			PreparedStatement pst2 = connexio.prepareStatement(sql2);
+			PreparedStatement pst2 = connexio
+					.prepareStatement("UPDATE LineaContracte SET databaixa = ? WHERE idContracte = ?");
 			pst2.clearParameters();
-			pst2.setInt(1, contracte.getId());
-			pst2.executeUpdate();
+			long data = contracte.getDataBaixa().getTime();
+			pst2.setDate(1, new Date(data));
+			pst2.setInt(2, contracte.getId());
+			pst2.executeQuery();
 			return llista;
 		} catch (Exception e) {
 			throw new Exception("Error eliminarlinies - " + e.getMessage());

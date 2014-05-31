@@ -3,12 +3,14 @@ package Aplicacio;
 import java.util.Date;
 import java.util.LinkedList;
 
+import Domini.Comerc;
 import Domini.Contracte;
 import Domini.Maquina;
 import Persistencia.ContracteBBDD;
 import Persistencia.ComercBBDD;
 import Persistencia.LineaContracteBBDD;
 import Persistencia.MaquinaBBDD;
+
 //pene
 public class ControladorContracte {
 
@@ -84,14 +86,11 @@ public class ControladorContracte {
 	}
 
 	public int nouContracte(int idComerc, String info,
-			LinkedList<Integer> idmaquines) throws Exception {
+			LinkedList<Integer> idmaquines, double percentatge, double pagament)
+			throws Exception {
 		try {
-			Contracte contracte = new Contracte(info, new Date());
-			// capa persistencia te sql date, tots els altres util date, cuan la
-			// persistencia reb una data rep un sql date,
-			// el transforma en un long(Amb un mètode propi que te). El util
-			// date el canvies a sql amb el preparedStatement.getDate(utildate)
-
+			Contracte contracte = new Contracte(info, new Date(), percentatge,
+					pagament);
 			contracteBBDD.inserirContracte(idComerc, contracte);
 			for (Integer m : idmaquines) {
 				Maquina maquina = maquinaBBDD.recuperarMaquina(m);
@@ -111,6 +110,17 @@ public class ControladorContracte {
 		} catch (Exception e) {
 			throw new Exception("Error comercAmbContracte - " + e.getMessage());
 		}
+	}
+
+	public String mirarTipusComerc(int idComerc) throws Exception {
+		Comerc comerc;
+		try {
+			comerc = comercBBDD.recuperarComerc(idComerc);
+			return comerc.getTipus();
+		} catch (Exception e) {
+			throw new Exception("Error mirarTipusComerc - " + e.getMessage());
+		}
+
 	}
 
 }

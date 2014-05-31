@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 
 import Domini.Contracte;
 
-
 public class ContracteBBDD {
 
 	private ConnexioBBDD connexio;
@@ -31,8 +30,6 @@ public class ContracteBBDD {
 						rs.getDate("dataalta"), rs.getInt("idContracte"));
 			}
 			return null;
-			// si no funciona fem un getDate passat a long i del long fem el new
-			// Date del util
 		} catch (Exception e) {
 			throw new Exception("Error agafarContracte - " + e.getMessage());
 		}
@@ -71,8 +68,15 @@ public class ContracteBBDD {
 	public void inserirContracte(int idComerc, Contracte contracte)
 			throws Exception {
 		try {
-			String sql = "INSERT INTO Contracte(idcontracte, infocontracte, dataalta, idcomerc) VALUES(?,?,?,?)";
-			PreparedStatement pst = connexio.prepareStatement(sql);
+			PreparedStatement pst;
+			String sql;
+			if(contracte.getPagament()==-1){
+				sql = "INSERT INTO Contracte(idcontracte, infocontracte, dataalta, idcomerc, percentatge) VALUES(?,?,?,?,?)";
+				
+			}else{
+				sql = "INSERT INTO Contracte(idcontracte, infocontracte, dataalta, idcomerc, pagament) VALUES(?,?,?,?,?)";
+			}
+			pst = connexio.prepareStatement(sql);
 			PreparedStatement pst2 = connexio
 					.prepareStatement("SELECT S_CONTRACTE.NEXTVAL FROM DUAL");
 			pst2.clearParameters();
@@ -85,6 +89,11 @@ public class ContracteBBDD {
 			long data = contracte.getDataAlta().getTime();
 			pst.setDate(3, new Date(data));
 			pst.setInt(4, idComerc);
+			if(contracte.getPagament()==-1){
+				pst.setDouble(5, contracte.getPercentatge());				
+			}else{
+				pst.setDouble(5, contracte.getPagament());
+			}			
 			if (pst.executeUpdate() != 1) {
 				throw new Exception("Contracte inserit incorrectament");
 			}

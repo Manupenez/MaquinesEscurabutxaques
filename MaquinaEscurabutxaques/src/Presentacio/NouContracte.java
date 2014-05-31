@@ -33,7 +33,6 @@ public class NouContracte extends JFrame {
 	private JList listComercos;
 	private LinkedList<Integer> maquinesXContracte;
 	private JButton btnAcceptar;
-	private JButton btnAfegir;
 	private JTextField tfInfo;
 
 	/**
@@ -66,36 +65,26 @@ public class NouContracte extends JFrame {
 		btnAcceptar.setEnabled(false);
 		btnAcceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!(listMaquines.isSelectionEmpty() || listComercos.isSelectionEmpty())){
+				if (!(listMaquines.isSelectionEmpty() || listComercos
+						.isSelectionEmpty())) {
 					for (Object maquina : listMaquines.getSelectedValuesList()) {
 						maquinesXContracte.add(Integer.parseInt(String
 								.valueOf(maquina)));
 					}
 					try {
-						if(tfInfo.getText()==null){
+						if (tfInfo.getText() == null) {
 							tfInfo.setText(" ");
 						}
-						int retorn = controladorContracte.nouContracte(Integer.parseInt(String
-								.valueOf(listComercos.getSelectedValue())), tfInfo
-								.getText(), maquinesXContracte);
-						JOptionPane.showMessageDialog(new JFrame(), "Creat contracte: "+retorn, "Contracte Creat",
-								JOptionPane.PLAIN_MESSAGE);
-						/*
-						 * HEM DE FER QUE AL APRETAR ACCEPTAR S'OBRI UNA NOVA FINESTRA
-						 * AQUESTA IDENTIFICARA DIRECTAMENT SI EL COMERÇ ÉS MAJORISTA 
-						 * O MINORISTA MITJANÇANT EL SEU IDCOMERÇ.ET DEIXARÀ ESCOLLIR
-						 * EL PERCENTATGE DE LA RECAPTAICIÓ PACTAT O EL PAGAMENT EFECTUAT
-						 */
+						pantallaDiners();
 					} catch (Exception e1) {
 						tirarError(e1.getMessage());
 					}
-					tornarEnrere();
-				}else{
-					tirarError("Has de seleccionar un comerç i mínim una màquina");
+				} else {
+					tirarError("Has de seleccionar un comer� i m�nim una m�quina");
 				}
 			}
 		});
-		
+
 		omplirPantalla();
 
 		btnAcceptar.setBounds(318, 214, 126, 29);
@@ -109,10 +98,19 @@ public class NouContracte extends JFrame {
 		lblMquines.setBounds(19, 14, 61, 16);
 		contentPane.add(lblMquines);
 
-		JLabel lblInformaciDelContracte = new JLabel("Informació del contracte");
+		JLabel lblInformaciDelContracte = new JLabel(
+				"Informació del contracte");
 		lblInformaciDelContracte.setBounds(20, 197, 266, 16);
 		contentPane.add(lblInformaciDelContracte);
 
+	}
+
+	public void pantallaDiners() {
+		NouContracteDiners contracteDiners = new NouContracteDiners(
+				Integer.parseInt(String.valueOf(listComercos.getSelectedValue())),
+				tfInfo.getText(), maquinesXContracte);
+		contracteDiners.setVisible(true);
+		this.dispose();
 	}
 
 	public void tornarEnrere() {
@@ -161,7 +159,7 @@ public class NouContracte extends JFrame {
 					tirarError("No hi ha Maquines llestes per distribuïr");
 				}
 			} else {
-				tirarError("No hi ha Comerços sense contracte");
+				tirarError("No hi ha Comer�os sense contracte");
 			}
 
 		} catch (Exception e) {

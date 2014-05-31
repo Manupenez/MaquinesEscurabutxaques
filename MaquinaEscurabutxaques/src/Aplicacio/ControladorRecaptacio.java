@@ -6,7 +6,7 @@ import Domini.Recaptacio;
 import Persistencia.ContracteBBDD;
 import Persistencia.MaquinaBBDD;
 import Persistencia.RecaptacioBBDD;
-import Persistencia.ReparacioBBDD;
+
 
 public class ControladorRecaptacio {
 	
