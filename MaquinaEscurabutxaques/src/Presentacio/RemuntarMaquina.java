@@ -25,7 +25,7 @@ public class RemuntarMaquina extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnCancellar = new JButton("CancelÂ·lar");
+		JButton btnCancellar = new JButton("Cancel·lar");
 		btnCancellar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tornarEnrere();

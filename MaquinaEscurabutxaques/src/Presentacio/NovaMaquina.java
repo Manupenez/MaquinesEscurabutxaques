@@ -47,7 +47,7 @@ public class NovaMaquina extends JFrame {
 			tirarError(e1.getMessage());
 		}
 
-		JButton btnCancellar = new JButton("CancelÂ·lar");
+		JButton btnCancellar = new JButton("Cancel·lar");
 		btnCancellar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tornarEnrere();
@@ -66,7 +66,7 @@ public class NovaMaquina extends JFrame {
 		lblCarcassa.setBounds(182, 19, 61, 16);
 		contentPane.add(lblCarcassa);
 
-		JLabel lblTcnic = new JLabel("TÃ¨cnic");
+		JLabel lblTcnic = new JLabel("Tècnic");
 		lblTcnic.setBounds(333, 19, 61, 16);
 		contentPane.add(lblTcnic);
 
@@ -78,10 +78,10 @@ public class NovaMaquina extends JFrame {
 					if (listTecnic.isSelectionEmpty()
 							|| listCarcassa.isSelectionEmpty()
 							|| listPlaca.isSelectionEmpty()) {
-						tirarError("Has de seleccionar un tÃ¨cnic, una carcassa i una placa");
+						tirarError("Has de seleccionar un tècnic, una carcassa i una placa");
 					} else {
 
-						String str = ("MÃ quina Muntada amb ID: " + controladorMaquina
+						String str = ("Màquina Muntada amb ID: " + controladorMaquina
 								.muntarMaquina(
 										Integer.parseInt(String
 												.valueOf(listTecnic
@@ -93,7 +93,7 @@ public class NovaMaquina extends JFrame {
 												.valueOf(listCarcassa
 														.getSelectedValue()))));
 						JOptionPane.showMessageDialog(new JFrame(), str,
-								"MÃ quina Creada", JOptionPane.PLAIN_MESSAGE);
+								"Màquina Creada", JOptionPane.PLAIN_MESSAGE);
 					}
 				} catch (Exception e1) {
 					tirarError(e1.getMessage());

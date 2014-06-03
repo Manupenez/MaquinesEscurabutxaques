@@ -11,7 +11,6 @@ import Persistencia.ComercBBDD;
 import Persistencia.LineaContracteBBDD;
 import Persistencia.MaquinaBBDD;
 
-//pene
 public class ControladorContracte {
 
 	private Contracte contracte;
