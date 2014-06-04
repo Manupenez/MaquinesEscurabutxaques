@@ -13,6 +13,7 @@ import javax.swing.border.EmptyBorder;
 public class RemuntarMaquina extends JFrame {
 
 	private JPanel contentPane;
+	private JButton btnAcceptar;
 
 	/**
 	 * Create the frame.
@@ -36,6 +37,14 @@ public class RemuntarMaquina extends JFrame {
 		btnCancellar.setBounds(300, 228, 124, 23);
 		contentPane.add(btnCancellar);
 		
+		btnAcceptar = new JButton("Acceptar");
+		btnAcceptar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnAcceptar.setBounds(300, 194, 124, 23);
+		contentPane.add(btnAcceptar);
+		
 	}
 	
 	public void tornarEnrere(){
@@ -43,5 +52,4 @@ public class RemuntarMaquina extends JFrame {
 		principal.setVisible(true);
 		this.dispose();
 	}
-
 }

@@ -37,7 +37,7 @@ public class PantallaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaPrincipal() {
-		setTitle("M√†quina Escurabutxaques");
+		setTitle("M‡quina Escurabutxaques");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -56,8 +56,8 @@ public class PantallaPrincipal extends JFrame {
 
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {
-				"Gesti√≥ m√†quina", "Gesti√≥ reparacions", "Gesti√≥ contrcate",
-				"Gesti√≥ recaptacions" }));
+				"GestiÛ m‡quina", "GestiÛ reparacions", "GestiÛ contrcate",
+				"GestiÛ recaptacions" }));
 		comboBox.setSelectedIndex(0);
 		comboBox.setBounds(106, 78, 218, 20);
 		contentPane.add(comboBox);

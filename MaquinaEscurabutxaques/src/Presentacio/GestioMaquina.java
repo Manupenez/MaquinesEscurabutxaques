@@ -23,7 +23,7 @@ public class GestioMaquina extends JFrame {
 	 * Create the frame.
 	 */
 	public GestioMaquina() {
-		setTitle("GestiÃ³ MÃ quina");
+		setTitle("Gestió Màquina");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -42,7 +42,7 @@ public class GestioMaquina extends JFrame {
 
 		comboBox = new JComboBox<String>();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {
-				"Nova MÃ quina", "Revisar MÃ quina", "Remuntar MÃ quina" }));
+				"Nova Màquina", "Revisar Màquina", "Remuntar Màquina" }));
 		comboBox.setSelectedIndex(0);
 		comboBox.setToolTipText("");
 		comboBox.setMaximumRowCount(3);
@@ -58,7 +58,7 @@ public class GestioMaquina extends JFrame {
 		btnOk.setBounds(172, 134, 89, 23);
 		contentPane.add(btnOk);
 
-		JLabel lblGestiContracte = new JLabel("GestiÃ³ MÃ quina");
+		JLabel lblGestiContracte = new JLabel("Gestió Màquina");
 		lblGestiContracte.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		lblGestiContracte.setBounds(147, 32, 175, 14);
 		contentPane.add(lblGestiContracte);
