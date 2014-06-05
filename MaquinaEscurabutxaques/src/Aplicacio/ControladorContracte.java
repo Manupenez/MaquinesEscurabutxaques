@@ -2,6 +2,7 @@ package Aplicacio;
 
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 import Domini.Comerc;
 import Domini.Contracte;
@@ -13,7 +14,6 @@ import Persistencia.MaquinaBBDD;
 
 public class ControladorContracte {
 
-	private Contracte contracte;
 	private ContracteBBDD contracteBBDD;
 	private ComercBBDD comercBBDD;
 	private MaquinaBBDD maquinaBBDD;
@@ -26,30 +26,32 @@ public class ControladorContracte {
 		lineaContracteBBDD = new LineaContracteBBDD();
 	}
 
-	public void aconseguirContracte(int idComerc) throws Exception {
+	public Contracte aconseguirContracte(int idComerc) throws Exception {
+		//canviat el return void a return int
 		try {
-			this.contracte = this.contracteBBDD
+			return this.contracteBBDD
 					.recuperarContracteActual(idComerc);
 		} catch (Exception e) {
 			throw new Exception("Error aconseguirContracte - " + e.getMessage());
 		}
 	}
-
-	public void modificarContracte(int idComerc, String info) throws Exception {
-		try {
-			this.aconseguirContracte(idComerc);
-			this.contracte.setInformacio(info);
-			this.contracteBBDD.guardarContracteModificat(contracte, idComerc);
+//clonar el contracte amb idnou(assignat per bbdd), donar de baixa LiniaContracte i ferles de nou
+	// afegir a LC maquines,etc.
+	public void modificarContracte(int idComerc, String info,LinkedList<Integer> idmaquines, double percentatge,
+			double pagament) throws Exception {
+		try {	
+			this.baixaContracte(this.aconseguirContracte(idComerc).getId());	
+			this.nouContracte(idComerc, info, idmaquines, percentatge, pagament);			
 		} catch (Exception e) {
 			throw new Exception("Error modificarContracte - " + e.getMessage());
 		}
 	}
 
-	public void baixaContracte(int i) throws Exception {
+	public void baixaContracte(int id) throws Exception {
 		try {
 
 			Contracte contracte = this.contracteBBDD
-					.recuperarContracteActual(i);
+					.recuperarContracteActual(id);
 			contracte.setDataBaixa(new Date());
 			contracteBBDD.posarDataBaixa(contracte);
 			LinkedList<Integer> idmaquines = lineaContracteBBDD
@@ -88,8 +90,9 @@ public class ControladorContracte {
 			LinkedList<Integer> idmaquines, double percentatge, double pagament)
 			throws Exception {
 		try {
+			
 			Contracte contracte = new Contracte(info, new Date(), percentatge,
-					pagament);
+					pagament,this.comercBBDD.recuperarComerc(idComerc));
 			contracteBBDD.inserirContracte(idComerc, contracte);
 			for (Integer m : idmaquines) {
 				Maquina maquina = maquinaBBDD.recuperarMaquina(m);
@@ -122,4 +125,5 @@ public class ControladorContracte {
 
 	}
 
+	
 }

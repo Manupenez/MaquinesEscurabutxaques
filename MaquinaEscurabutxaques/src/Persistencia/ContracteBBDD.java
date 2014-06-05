@@ -26,8 +26,10 @@ public class ContracteBBDD {
 			pst.setInt(1, i);
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
+				ComercBBDD comercBBDD = new ComercBBDD();
+				
 				return new Contracte(rs.getString("infocontracte"),
-						rs.getDate("dataalta"), rs.getInt("idContracte"));
+						rs.getDate("dataalta"),rs.getDate("databaixa"),rs.getDouble("percentatge"),rs.getDouble("pagament"),comercBBDD.recuperarComerc(rs.getInt("idcomerc")),rs.getInt("idContracte"));
 			}
 			return null;
 		} catch (Exception e) {

@@ -17,9 +17,9 @@ public class Recaptacio {
 	
 	public String generarInforme(){
 		String informe;		
-		int pagamentClient=this.contracte.getPercentatge();
-		String client= this.contracte.getTipusComerc();
-		if(client == "minorista"){
+		double pagamentClient=this.contracte.getPercentatge();
+		String client= this.contracte.getComerc().getTipus();
+		if(client == "MINORISTA"){
 			informe= ("El contracte: "+this.contracte.getId() + "és d'un minorista. Li hem pagat "+pagamentClient
 					+"hi la màquina ha recullit: "+dinersMaquina);
 		}
