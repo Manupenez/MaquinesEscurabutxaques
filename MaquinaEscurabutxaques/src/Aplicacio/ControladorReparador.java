@@ -15,12 +15,16 @@ public class ControladorReparador {
 
 	private MaquinaBBDD maquinaBBDD;
 	private ReparacioBBDD reparacioBBDD;
-	// MÃ¨tode que retorna maquines que estan per reperar
 	
 	public ControladorReparador() throws Exception{
 		this.maquinaBBDD = new MaquinaBBDD();
 		this.reparacioBBDD = new ReparacioBBDD ();
 	}
+	
+	/** Retorna les màquines que tenen com a estat "ESPATLLADA"
+	 * @return LinkedList<Integer>
+	 * @throws Exception
+	 */
 	public LinkedList<Integer> obtenirMaquinesPerReparar() throws Exception {
 		try {
 			return maquinaBBDD.obtenirMaquines("ESPATLLADA");
@@ -29,6 +33,12 @@ public class ControladorReparador {
 		}
 	}
 	
+	/** Posa a finalitzat l'estat de la reparació i ocupa la placa i la carcassa.
+	 * @param idReparacio
+	 * @param idCarcassa
+	 * @param idPlaca
+	 * @throws Exception
+	 */
 	public void canviarEstatFinalitzat(int idReparacio, int idCarcassa, int idPlaca) throws Exception{
 		try {
 		Reparacio reparacio = this.recuperarReparacio(idReparacio);	
@@ -63,6 +73,12 @@ public class ControladorReparador {
 			throw new Exception ("Error modificarReparacio: "+e.getMessage());
 		}
 	}
+	
+	/** Recupera una reparació de la BBDd
+	 * @param idReparacio
+	 * @return Reparació
+	 * @throws Exception
+	 */
 	private Reparacio recuperarReparacio(int idReparacio) throws Exception{
 		try {
 			return this.reparacioBBDD.recuperarReparacio(idReparacio);
@@ -70,6 +86,12 @@ public class ControladorReparador {
 			throw new Exception ("Error recuperarReparacio: "+e.getMessage());
 		}
 	}
+	
+	/** Insereix una reparació a la BBDD
+	 * @param idMaquina
+	 * @param comerc
+	 * @throws Exception
+	 */
 	public void inserirReparacio(int idMaquina, Comerc comerc) throws Exception{
 		try{
 		Maquina maquina= maquinaBBDD.recuperarMaquina(idMaquina);	

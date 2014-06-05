@@ -26,30 +26,56 @@ public class ControladorContracte {
 		lineaContracteBBDD = new LineaContracteBBDD();
 	}
 
+	/**
+	 * Retorna el contracte del comerç passat per paràmetre
+	 * 
+	 * @param idComerc
+	 * @return Contracte
+	 * @throws Exception
+	 */
 	public Contracte aconseguirContracte(int idComerc) throws Exception {
-		//canviat el return void a return int
+		// canviat el return void a return int
 		try {
-			return this.contracteBBDD
-					.recuperarContracteActual(idComerc);
+			return this.contracteBBDD.recuperarContracteActual(idComerc);
 		} catch (Exception e) {
 			throw new Exception("Error aconseguirContracte - " + e.getMessage());
 		}
 	}
-//clonar el contracte amb idnou(assignat per bbdd), donar de baixa LiniaContracte i ferles de nou
+
+	// clonar el contracte amb idnou(assignat per bbdd), donar de baixa
+	// LiniaContracte i ferles de nou
 	// afegir a LC maquines,etc.
-	public void modificarContracte(int idComerc, String info,LinkedList<Integer> idmaquines, double percentatge,
-			double pagament) throws Exception {
-		try {	
-			this.baixaContracte(this.aconseguirContracte(idComerc).getId());	
-			this.nouContracte(idComerc, info, idmaquines, percentatge, pagament);			
+	/**
+	 * Posa data baixa al contracte anterior i en crea un de nou amb la
+	 * informació modificada.
+	 * 
+	 * @param idComerc
+	 * @param info
+	 * @param idmaquines
+	 * @param percentatge
+	 * @param pagament
+	 * @throws Exception
+	 */
+	public void modificarContracte(int idComerc, String info,
+			LinkedList<Integer> idmaquines, double percentatge, double pagament)
+			throws Exception {
+		try {
+			this.baixaContracte(this.aconseguirContracte(idComerc).getId());
+			this.nouContracte(idComerc, info, idmaquines, percentatge, pagament);
 		} catch (Exception e) {
 			throw new Exception("Error modificarContracte - " + e.getMessage());
 		}
 	}
 
+	/**
+	 * Posa la data de baixa d'un contracte com a la data actual, elimina les
+	 * lineas de contracte i posa l'estat de les màquines a lliure.
+	 * 
+	 * @param id
+	 * @throws Exception
+	 */
 	public void baixaContracte(int id) throws Exception {
 		try {
-
 			Contracte contracte = this.contracteBBDD
 					.recuperarContracteActual(id);
 			contracte.setDataBaixa(new Date());
@@ -61,12 +87,15 @@ public class ControladorContracte {
 				maquina.setEstatLLesta();
 				maquinaBBDD.modificarEstat(maquina);
 			}
-
 		} catch (Exception e) {
 			throw new Exception("Error baixaContracte - " + e.getMessage());
 		}
 	}
 
+	/** Retorna els comerços que no tenen cap contracte vigent.
+	 * @return LinkedList<Integer>
+	 * @throws Exception
+	 */
 	public LinkedList<Integer> comercSenseContracte() throws Exception {
 		try {
 			return comercBBDD.senseContracte();
@@ -76,6 +105,11 @@ public class ControladorContracte {
 		}
 	}
 
+	/** Retorna les màquines que com a estat el que li passen per paràmetre. 
+	 * @param estat
+	 * @return LinkedList<Integer>
+	 * @throws Exception
+	 */
 	public LinkedList<Integer> obtenirMaquinesLlestes(String estat)
 			throws Exception {
 		try {
@@ -86,13 +120,21 @@ public class ControladorContracte {
 		}
 	}
 
+	/** Crea un contracte amb la informació passada per paràmetres, retorna la ID del contracte.
+	 * @param idComerc
+	 * @param info
+	 * @param idmaquines
+	 * @param percentatge
+	 * @param pagament
+	 * @return id del contracte creat
+	 * @throws Exception
+	 */
 	public int nouContracte(int idComerc, String info,
 			LinkedList<Integer> idmaquines, double percentatge, double pagament)
 			throws Exception {
 		try {
-			
 			Contracte contracte = new Contracte(info, new Date(), percentatge,
-					pagament,this.comercBBDD.recuperarComerc(idComerc));
+					pagament, this.comercBBDD.recuperarComerc(idComerc));
 			contracteBBDD.inserirContracte(idComerc, contracte);
 			for (Integer m : idmaquines) {
 				Maquina maquina = maquinaBBDD.recuperarMaquina(m);
@@ -106,6 +148,10 @@ public class ControladorContracte {
 		}
 	}
 
+	/** Retorna els comerços que tenen contractes vigents.
+	 * @return LinkedList<Integer>
+	 * @throws Exception
+	 */
 	public LinkedList<Integer> comercAmbContracte() throws Exception {
 		try {
 			return comercBBDD.ambContracteActiu();
@@ -114,6 +160,11 @@ public class ControladorContracte {
 		}
 	}
 
+	/** Retorna el tipus del comerç que se li ha passat per paràmetre.
+	 * @param idComerc
+	 * @return Tipus del comerç
+	 * @throws Exception
+	 */
 	public String mirarTipusComerc(int idComerc) throws Exception {
 		Comerc comerc;
 		try {
@@ -125,5 +176,4 @@ public class ControladorContracte {
 
 	}
 
-	
 }

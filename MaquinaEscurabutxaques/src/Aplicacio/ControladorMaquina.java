@@ -23,7 +23,10 @@ public class ControladorMaquina {
 		carcassaBBDD = new CarcassaBBDD();
 	}
 
-	//M√®tode que genera una llista de les id dels t√®cnics que poden muntar una m√†quina.
+	/**MËtode que genera una llista de les id dels tËcnics que poden muntar una m‡quina.
+	 * @return
+	 * @throws Exception
+	 */
 	public LinkedList<Integer> obtenirTecnics() throws Exception {
 		try {
 			return this.tecnicBBDD.obtenirTecnicsPerMuntar();
@@ -32,7 +35,10 @@ public class ControladorMaquina {
 		}
 	}
 
-	//M√®tode que genera una llista de les id de les plaques que no estan ocupades i es poden utilitzar
+	/**MËtode que genera una llista de les id de les plaques que no estan ocupades i es poden utilitzar
+	 * @return
+	 * @throws Exception
+	 */
 	public LinkedList<Integer> obtenirLListaPlaques() throws Exception {
 		try {
 			return this.placaBBDD.obtenirPlaques();
@@ -42,7 +48,10 @@ public class ControladorMaquina {
 		}
 	}
 
-	//M√®tode que genera una llista de les id de les carcasses que no estan ocupades i es poden utilitzar
+	/**	MËtode que genera una llista de les id de les carcasses que no estan ocupades i es poden utilitzar
+	 * @return
+	 * @throws Exception
+	 */
 	public LinkedList<Integer> obtenirLListaCarcasses() throws Exception {
 		try {
 			return this.carcassaBBDD.obtenirCarcasses();
@@ -52,7 +61,13 @@ public class ControladorMaquina {
 		}
 	}
 
-	//M√®tode que recupera de la base de dades la informaci√≥ necess√†ria per a crear una m√†quina
+	/**MËtode que recupera de la base de dades la informaciÛ necess‡ria per a crear una m‡quina
+	 * @param idTecnic
+	 * @param idPlaca
+	 * @param idCarcassa
+	 * @return
+	 * @throws Exception
+	 */
 	public int muntarMaquina(int idTecnic, int idPlaca, int idCarcassa)
 			throws Exception {
 		try {
@@ -71,6 +86,10 @@ public class ControladorMaquina {
 	}
 
 	//M√®tode que retorna una llista amb els id de les m√†quines que han de ser revisades
+	/**
+	 * @return
+	 * @throws Exception
+	 */
 	public LinkedList<Integer> obtenirMaquinesRevisar() throws Exception {
 		try {
 			return this.maquinaBBDD.obtenirMaquines("REVISAR");
@@ -81,6 +100,10 @@ public class ControladorMaquina {
 	}
 
 	//M√®tode que retorna una llista amb els id de les m√†quines que shan de tornar a muntar 
+	/**
+	 * @return
+	 * @throws Exception
+	 */
 	public LinkedList<Integer> obtenirMaquinesReMuntar() throws Exception {
 		try {
 			return this.maquinaBBDD.obtenirMaquines("TORNAR A MUNTAR");
@@ -91,6 +114,11 @@ public class ControladorMaquina {
 	}
 
 	//M√®tode que rebent l'id d'una m√†quina escull un t√®cnic que la pugui revisar
+	/**
+	 * @param idMaquina
+	 * @return
+	 * @throws Exception
+	 */
 	public LinkedList<Integer> obtenirTecnicsRevisar(int idMaquina)
 			throws Exception {
 		try {
@@ -102,7 +130,10 @@ public class ControladorMaquina {
 		}
 	}
 
-	//M√®tode que rebent l'id de la m√†quina que es vol tornar a muntar la torna a muntar i deixa pendent de revisar
+	/**MËtode que rebent l'id de la m‡quina que es vol tornar a muntar la torna a muntar i deixa pendent de revisar
+	 * @param idMaquina
+	 * @throws Exception
+	 */
 	public void tornarMuntar(int idMaquina) throws Exception {
 		try {
 
@@ -115,8 +146,14 @@ public class ControladorMaquina {
 
 	}
 
-	//M√®tode que, segons el que ha decidit el t√®cnic amb l'id passat com a parametre, canvia l'estat de la m√†quina
-	//(idMaquina) a pendent de tornar a ser muntada(false) o llesta (true)
+
+	/**MËtode que, segons el que ha decidit el tËcnic amb l'id passat com a parametre, canvia l'estat de la m‡quina
+	 * (idMaquina) a pendent de tornar a ser muntada(false) o llesta (true)
+	 * @param idTecnic
+	 * @param idMaquina
+	 * @param ok
+	 * @throws Exception
+	 */
 	public void canviarEstatOK(int idTecnic, int idMaquina, boolean ok)
 			throws Exception {
 		try {

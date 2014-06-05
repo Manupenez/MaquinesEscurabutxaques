@@ -20,6 +20,12 @@ public class ControladorRecaptacio {
 		this.contracteBBDD = new ContracteBBDD ();
 	}
 	
+	/** Mètode que genera un informe i l'introdueix a BBDD.
+	 * @param idmaquina
+	 * @param idcontracte
+	 * @param dinersMaquina
+	 * @throws Exception
+	 */
 	public void crearInformeRecaptacio(int idmaquina, int idcontracte, int dinersMaquina) throws Exception{
 		try{
 		Maquina maquina = maquinaBBDD.recuperarMaquina(idmaquina);
@@ -30,6 +36,11 @@ public class ControladorRecaptacio {
 			throw new Exception ("Error crearInformeRecaptacio: "+e.getMessage());
 		}
 	}
+	
+	/** Mètode que retorna l'objecte Recaptació amb l'id que es passa per paràmetre.
+	 * @param idrecaptacio
+	 * @return Recaptació
+	 */
 	public Recaptacio recuperarRecaptacio(int idrecaptacio){
 		return this.recaptacioBBDD.recuperarRecaptacio(idrecaptacio);
 	}
