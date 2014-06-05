@@ -58,15 +58,14 @@ public class RevisarMaquina extends JFrame {
 		contentPane.setLayout(null);
 		btnCancellar.setBounds(208, 262, 117, 23);
 		contentPane.add(btnCancellar);
-		
+
 		omplirPantalla();
 
-		
-		
 		btnMquina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (listMaquines.isSelectionEmpty()) {
 					tirarError("Has de seleccionar quina màquina vols revisar");
+					btnMquina.setEnabled(false);
 				} else {
 					try {
 						btnTecnic.setEnabled(true);
@@ -80,7 +79,8 @@ public class RevisarMaquina extends JFrame {
 							modelTecnics.addElement(tecnic);
 						}
 						listTecnics = new JList(modelTecnics);
-						listTecnics.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+						listTecnics
+								.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 						listTecnics.setBounds(208, 47, 117, 161);
 						contentPane.add(listTecnics);
 						contentPane.updateUI();
@@ -97,11 +97,34 @@ public class RevisarMaquina extends JFrame {
 					tirarError("Has de seleccionar un tècnic per que revisi la màquina");
 				} else {
 					try {
-						controladorMaquina.canviarEstatOK(Integer
-								.parseInt(String.valueOf(listTecnics
-										.getSelectedValue())), Integer
-								.parseInt(String.valueOf(listMaquines
-										.getSelectedValue())), true);
+						Object[] options = { "Si", "No" };
+						int n = JOptionPane.showOptionDialog(new JFrame(),
+								"La màquina està correcte?",
+								"Revisió de Màquina",
+								JOptionPane.YES_NO_OPTION,
+								JOptionPane.QUESTION_MESSAGE, null, options,
+								options[0]);
+						if (n == JOptionPane.YES_OPTION) {
+							controladorMaquina.canviarEstatOK(Integer
+									.parseInt(String.valueOf(listTecnics
+											.getSelectedValue())), Integer
+									.parseInt(String.valueOf(listMaquines
+											.getSelectedValue())), true);
+							JOptionPane.showMessageDialog(new JFrame(),
+									"Maquina amb id: "+listMaquines.getSelectedValue()+" revisada per tècnic: "+listTecnics.getSelectedValue(),
+									"Màquina Revisada", JOptionPane.PLAIN_MESSAGE);
+						} else {
+							if (n == JOptionPane.NO_OPTION) {
+								controladorMaquina.canviarEstatOK(Integer
+										.parseInt(String.valueOf(listTecnics
+												.getSelectedValue())), Integer
+										.parseInt(String.valueOf(listMaquines
+												.getSelectedValue())), false);
+								JOptionPane.showMessageDialog(new JFrame(),
+										"Maquina amb id: "+listMaquines.getSelectedValue()+" revisada per tècnic: "+listTecnics.getSelectedValue(),
+										"Màquina Revisada", JOptionPane.PLAIN_MESSAGE);
+							}
+						}
 						tornarEnrere();
 					} catch (Exception e1) {
 						tirarError(e1.getMessage());
@@ -116,6 +139,9 @@ public class RevisarMaquina extends JFrame {
 		LinkedList<Integer> maquines;
 		try {
 			maquines = controladorMaquina.obtenirMaquinesRevisar();
+			if (maquines.isEmpty()) {
+				tirarError("No hi han màquines per revisar");
+			}
 			modelMaquines = new DefaultListModel();
 			for (Integer maquina : maquines) {
 				modelMaquines.addElement(maquina);
@@ -136,8 +162,6 @@ public class RevisarMaquina extends JFrame {
 		JLabel lblMaquinesPerRevisar = new JLabel("M\u00E0quines per revisar:");
 		lblMaquinesPerRevisar.setBounds(19, 22, 142, 14);
 		contentPane.add(lblMaquinesPerRevisar);
-
-		
 
 		JLabel lblNewLabel = new JLabel("T\u00E8cnic per a revisar:");
 		lblNewLabel.setBounds(208, 22, 117, 14);
