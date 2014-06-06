@@ -39,7 +39,7 @@ public class LineaContracteBBDD {
 
 	}
 
-	public LinkedList<Integer> eliminarlinies(Contracte contracte)
+	public LinkedList<Integer> donarBaixaLineas(Contracte contracte)
 			throws Exception {
 		try {
 			String sql = "SELECT idMaquina FROM LineaContracte WHERE idContracte = ?";

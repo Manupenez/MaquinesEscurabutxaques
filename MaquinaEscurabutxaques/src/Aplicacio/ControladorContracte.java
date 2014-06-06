@@ -81,7 +81,7 @@ public class ControladorContracte {
 			contracte.setDataBaixa(new Date());
 			contracteBBDD.posarDataBaixa(contracte);
 			LinkedList<Integer> idmaquines = lineaContracteBBDD
-					.eliminarlinies(contracte);
+					.donarBaixaLineas(contracte);
 			for (Integer idmaquina : idmaquines) {
 				Maquina maquina = maquinaBBDD.recuperarMaquina(idmaquina);
 				maquina.setEstatLLesta();
