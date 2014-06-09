@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="src"/>
-<<<<<<< HEAD
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="ojdbc14.jar"/>
-	<classpathentry kind="lib" path="mysql-connector-java-5.1.19-bin.jar"/>
-=======
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
-	<classpathentry exported="true" kind="lib" path="ojdbc14.jar"/>
+	<classpathentry kind="src" path=""/>
+	<classpathentry exported="true" kind="lib" path=".classpath"/>
+	<classpathentry exported="true" kind="lib" path=".DS_Store"/>
+	<classpathentry exported="true" kind="lib" path=".project"/>
 	<classpathentry exported="true" kind="lib" path="mysql-connector-java-5.1.19-bin.jar"/>
->>>>>>> FETCH_HEAD
+	<classpathentry exported="true" kind="lib" path="ojdbc14.jar"/>
+	<classpathentry kind="lib" path="Lab inf 1 Connexions BBDD JDBC/ojdbc14.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.7"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -47,12 +47,12 @@ public class ContracteBBDD {
 			throw new Exception("Error agafarContracte - " + e.getMessage());
 		}
 	}
-	public Contracte recuperarContracteComerc(int i) throws Exception {
+	public Contracte recuperarContracteComerc(int idComerc) throws Exception {
 		try {
 			PreparedStatement pst = connexio
 					.prepareStatement("SELECT infocontracte, dataalta, idcontracte FROM Contracte WHERE idComerc = ? AND databaixa IS NULL");
 			pst.clearParameters();
-			pst.setInt(1, i);
+			pst.setInt(1, idComerc);
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
 				ComercBBDD comercBBDD = new ComercBBDD();
