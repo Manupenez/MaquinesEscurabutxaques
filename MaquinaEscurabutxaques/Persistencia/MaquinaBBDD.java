@@ -5,20 +5,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
-
-/*
-
- -gestio reparacions
- -gestio contracte
- -gestió recapacitó
- -informe anual minorista
- -informe anual majorista
-
- */
-
-
-
 import Domini.Carcassa;
+import Domini.Comerc;
 import Domini.Maquina;
 import Domini.Placa;
 import Domini.Tecnic;
@@ -242,7 +230,7 @@ public class MaquinaBBDD {
 		}
 	}
 
-	public LinkedList<Integer> obtenirMaquinesXComerc(int idComerc) throws Exception {
+	public LinkedList<Integer> obtenirMaquinesXComerc(Comerc comerc) throws Exception {
 		try{
 			String sql = "SELECT idmaquina FROM "
 				+ "(SELECT idMaquina FROM Maquina m JOIN lineaContracte lc ON "
@@ -252,7 +240,7 @@ public class MaquinaBBDD {
 		ResultSet rs;
 		pstm = connexio.prepareStatement(sql);
 		pstm.clearParameters();
-		pstm.setInt(1, idComerc);
+		pstm.setInt(1, comerc.getId());
 		rs = pstm.executeQuery();
 		while (rs.next()) {
 			maquines.add(rs.getInt("idmaquina"));

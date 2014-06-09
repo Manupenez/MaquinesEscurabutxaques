@@ -3,6 +3,7 @@ package Persistencia;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.LinkedList;
 
 import Domini.Contracte;
 
@@ -17,42 +18,13 @@ public class ContracteBBDD {
 	public void tancarConnexio() throws Exception {
 		connexio.close();
 	}
-	public Contracte recuperarContracte (int idContracte) throws Exception{
-		try{
-			PreparedStatement pst =connexio.prepareStatement("SELECT * FROM contracte WHERE idContracte = ?");
-			pst.clearParameters();
-			pst.setInt(1, idContracte);
-			ResultSet rs = pst.executeQuery();
-			if(rs.next()){
-				double pagament,percentatge;
-				
-				pagament = rs.getDouble("pagament");
-				if(rs.wasNull()) {
-					pagament = -1;
-				}
-				
-				percentatge = rs.getDouble("percentatge");
-				if(rs.wasNull()) {
-					percentatge = -1;
-				}
-				
-				ComercBBDD comercBBDD = new ComercBBDD();
-				
-				return new Contracte
-						(rs.getString("infoContracte"),rs.getDate("dataAlta"),rs.getDate("dataBaixa"), percentatge, 
-								pagament, comercBBDD.recuperarComerc(rs.getInt("idComerc")),rs.getInt("idContracte"));
-				}
-			return null;
-		}catch (Exception e) {
-			throw new Exception("Error recuperarContracte - " + e.getMessage());
-		}
-	}
-	public Contracte recuperarContracteComerc(int idComerc) throws Exception {
+	
+	public Contracte recuperarContracteActual(int i) throws Exception {
 		try {
 			PreparedStatement pst = connexio
 					.prepareStatement("SELECT infocontracte, dataalta, idcontracte FROM Contracte WHERE idComerc = ? AND databaixa IS NULL");
 			pst.clearParameters();
-			pst.setInt(1, idComerc);
+			pst.setInt(1, i);
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
 				ComercBBDD comercBBDD = new ComercBBDD();
@@ -62,7 +34,7 @@ public class ContracteBBDD {
 			}
 			return null;
 		} catch (Exception e) {
-			throw new Exception("Error recuperarContracteComerc - " + e.getMessage());
+			throw new Exception("Error agafarContracte - " + e.getMessage());
 		}
 	}
 
@@ -149,5 +121,4 @@ public class ContracteBBDD {
 			throw new Exception("Error getIdContracte - " + e.getMessage());
 		}
 	}
-
 }

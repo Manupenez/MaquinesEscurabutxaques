@@ -128,7 +128,9 @@ public class NouContracte extends JFrame {
 		LinkedList<Integer> comercos;
 		LinkedList<Integer> maquines;
 		try {
-			maquines = controladorContracte.obtenirMaquinesLlestes("LLESTA");
+
+			maquines = controladorContracte.obtenirMaquines("LLESTA");
+
 			comercos = controladorContracte.comercSenseContracte();
 			if (!comercos.isEmpty()) {
 				modelComerc = new DefaultListModel();

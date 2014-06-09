@@ -57,12 +57,12 @@ public class LineaContracteBBDD {
 			ContracteBBDD contracteBBDD = new ContracteBBDD();
 			LinkedList<LineaContracte> linies = new LinkedList<LineaContracte>();
 			PreparedStatement pst = connexio
-					.prepareStatement("SELECT dataalta, databaixa, idContracte, idMaquina FROM LineaContracte WHERE idContracte = ?");
+					.prepareStatement("SELECT dataalta, databaixa,idMaquina FROM LineaContracte WHERE idContracte = ?");
 			pst.clearParameters();
 			pst.setInt(1, contracte.getId());
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
-				//linies.add(new LineaContracte(rs.getDate("dataalta"), rs.getDate("databaixa"), maquinaBBDD.recuperarMaquina(rs.getInt("idMaquina") , contracteBBDD.recuperarContracte(rs.getInt("idContracte")))); 
+				linies.add(new LineaContracte(rs.getDate("dataalta"), rs.getDate("databaixa"), maquinaBBDD.recuperarMaquina(rs.getInt("idMaquina")), contracte)); 
 			}
 			return linies;
 		}catch(Exception e){

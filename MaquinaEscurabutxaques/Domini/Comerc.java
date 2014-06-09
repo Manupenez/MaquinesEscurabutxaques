@@ -21,4 +21,8 @@ public class Comerc {
 	public String getTipus() {
 		return tipus;
 	}
+	public int getId(){
+		return this.idComerc;
+	}
+
 }

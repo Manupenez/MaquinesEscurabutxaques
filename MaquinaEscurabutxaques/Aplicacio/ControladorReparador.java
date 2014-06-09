@@ -112,7 +112,10 @@ public class ControladorReparador {
 	 * @throws Exception 
 	 */
 	public LinkedList<Integer> obtenirMaquinesComerc(int idComerc) throws Exception {
-		LinkedList<Integer> id = maquinaBBDD.obtenirMaquinesXComerc(idComerc);
+
+		ComercBBDD comercBBDD = new ComercBBDD();
+		LinkedList<Integer> id = maquinaBBDD.obtenirMaquinesXComerc(comercBBDD.recuperarComerc(idComerc));
+
 		return id;
 	}
 	

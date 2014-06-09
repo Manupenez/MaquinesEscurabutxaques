@@ -64,5 +64,8 @@ public class Contracte {
 	public Comerc getComerc(){
 		return this.comerc;
 	}
-
+	
+	public String getTipusComerc() {
+		return this.comerc.getTipus();
+	}
 }
