@@ -29,7 +29,7 @@ public class ModificacioReparacio extends JFrame {
 	private JPanel contentPane;
 	private ControladorReparador controladorReparador;
 	private DefaultListModel llistaReparacions;
-	private JList list;
+	private JList listReparacions;
 	/**
 	 * Create the frame.
 	 */
@@ -57,7 +57,7 @@ public class ModificacioReparacio extends JFrame {
 		JButton btnNewButton = new JButton("Continuar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ModificarReparacioPeces nova = new ModificarReparacioPeces();
+				ModificarReparacioPeces nova = new ModificarReparacioPeces(listReparacions);
 				nova.setVisible(true);	
 				dispose();
 				/*for (Object reparacio: list.getSelectedValuesList()){
@@ -79,10 +79,10 @@ public class ModificacioReparacio extends JFrame {
 				for(Integer reparacio: reparacions){
 					llistaReparacions.addElement(reparacio);
 				}
-				list = new JList(llistaReparacions);
-				list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				list.setBounds(10, 47, 133, 193);
-				contentPane.add(list);
+				listReparacions = new JList(llistaReparacions);
+				listReparacions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				listReparacions.setBounds(10, 47, 133, 193);
+				contentPane.add(listReparacions);
 				
 				}
 			else{ tirarError("No hi han reparacions per fer");}

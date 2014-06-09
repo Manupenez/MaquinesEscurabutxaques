@@ -8,31 +8,21 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ModificarPecesReparacio extends JFrame {
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ModificarPecesReparacio frame = new ModificarPecesReparacio();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
+	private JList listPlaques;
+	private JList listCarcasses;
 	/**
 	 * Create the frame.
 	 */
-	public ModificarPecesReparacio() {
+	public ModificarPecesReparacio(JList listReparacions) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -48,13 +38,41 @@ public class ModificarPecesReparacio extends JFrame {
 		lblNewLabel_1.setBounds(128, 13, 104, 23);
 		contentPane.add(lblNewLabel_1);
 		
-		JList list = new JList();
-		list.setBounds(0, 58, 116, 182);
-		contentPane.add(list);
+		listPlaques = new JList();
+		listPlaques.setBounds(0, 58, 116, 182);
+		contentPane.add(listPlaques);
 		
-		JList list_1 = new JList();
-		list_1.setBounds(128, 58, 116, 182);
-		contentPane.add(list_1);
+		listCarcasses = new JList();
+		listCarcasses.setBounds(128, 58, 116, 182);
+		contentPane.add(listCarcasses);
+		
+		JButton btnFinalitzarReparaci = new JButton("Finalitzar Reparaci\u00F3");
+		btnFinalitzarReparaci.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+			}
+		});
+		btnFinalitzarReparaci.setBounds(256, 55, 164, 51);
+		contentPane.add(btnFinalitzarReparaci);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tornarEnrere();
+			}
+		});
+		btnCancelar.setBounds(323, 215, 97, 25);
+		contentPane.add(btnCancelar);
 	}
+	
+	public void tornarEnrere(){
+		PantallaPrincipal principal = new PantallaPrincipal();
+		principal.setVisible(true);
+		dispose();
+	}
+	public void tirarError(String missatge) {
+		JOptionPane.showMessageDialog(new JFrame(), missatge, "Error",
+				JOptionPane.ERROR_MESSAGE);
+	}	
 
 }
