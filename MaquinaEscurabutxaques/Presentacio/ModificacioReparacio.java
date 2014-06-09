@@ -56,16 +56,18 @@ public class ModificacioReparacio extends JFrame {
 		btnCancelar.setBounds(335, 215, 97, 25);
 		contentPane.add(btnCancelar);
 		
-		JButton btnNewButton = new JButton("Continuar");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {				
+		JButton continuar = new JButton("Continuar");
+		continuar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {		
+				if(!listReparacions.isSelectionEmpty()){
 				ModificarPecesReparacio nova = new ModificarPecesReparacio(Integer.parseInt(String.valueOf(listReparacions.getSelectedValue())));
 				nova.setVisible(true);	
 				dispose();
+				}
 			}
 		});
-		btnNewButton.setBounds(222, 86, 142, 47);
-		contentPane.add(btnNewButton);
+		continuar.setBounds(222, 86, 142, 47);
+		contentPane.add(continuar);
 	}
 	public void omplirPantalla(){
 		LinkedList<Integer> reparacions;
@@ -79,8 +81,7 @@ public class ModificacioReparacio extends JFrame {
 				listReparacions = new JList(llistaReparacions);
 				listReparacions.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 				listReparacions.setBounds(10, 47, 133, 193);
-				contentPane.add(listReparacions);
-				
+				contentPane.add(listReparacions);				
 				}
 			else{ tirarError("No hi han reparacions per fer");}
 		}catch(Exception e){
