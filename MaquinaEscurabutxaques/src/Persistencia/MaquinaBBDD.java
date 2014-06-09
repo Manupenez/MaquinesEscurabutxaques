@@ -16,6 +16,8 @@ import java.util.List;
 
  */
 
+
+
 import Domini.Carcassa;
 import Domini.Maquina;
 import Domini.Placa;
@@ -237,6 +239,28 @@ public class MaquinaBBDD {
 			ResultSet rs = pst.executeQuery();
 		} catch (Exception e) {
 			throw new Exception("Error modificarEstat - " + e.getMessage());
+		}
+	}
+
+	public LinkedList<Integer> obtenirMaquinesXComerc(int idComerc) throws Exception {
+		try{
+			String sql = "SELECT idmaquina FROM "
+				+ "(SELECT idMaquina FROM Maquina m JOIN lineaContracte lc ON "
+				+ "m.idMaquina = lc.idMaquina JOIN Contracte c ON lc.idContracte = c.idContracte WHERE c.idComerc = ?";
+		LinkedList<Integer> maquines = new LinkedList<Integer>();
+		PreparedStatement pstm;
+		ResultSet rs;
+		pstm = connexio.prepareStatement(sql);
+		pstm.clearParameters();
+		pstm.setInt(1, idComerc);
+		rs = pstm.executeQuery();
+		while (rs.next()) {
+			maquines.add(rs.getInt("idmaquina"));
+		}
+		return maquines;
+		}
+		catch(Exception e){
+			throw new Exception("Error obtenir màquines per comerç");
 		}
 	}
 

@@ -21,7 +21,7 @@ public class ControladorReparador {
 		this.reparacioBBDD = new ReparacioBBDD ();
 	}
 	
-	/** Retorna les m‡quines que tenen com a estat "ESPATLLADA"
+	/** Retorna les m√†quines que tenen com a estat "ESPATLLADA"
 	 * @return LinkedList<Integer>
 	 * @throws Exception
 	 */
@@ -33,7 +33,7 @@ public class ControladorReparador {
 		}
 	}
 	
-	/** Posa a finalitzat l'estat de la reparaciÛ i ocupa la placa i la carcassa.
+	/** Posa a finalitzat l'estat de la reparaci√≥ i ocupa la placa i la carcassa.
 	 * @param idReparacio
 	 * @param idCarcassa
 	 * @param idPlaca
@@ -74,9 +74,9 @@ public class ControladorReparador {
 		}
 	}
 	
-	/** Recupera una reparaciÛ de la BBDd
+	/** Recupera una reparaci√≥ de la BBDd
 	 * @param idReparacio
-	 * @return ReparaciÛ
+	 * @return Reparaci√≥
 	 * @throws Exception
 	 */
 	private Reparacio recuperarReparacio(int idReparacio) throws Exception{
@@ -87,7 +87,7 @@ public class ControladorReparador {
 		}
 	}
 	
-	/** Insereix una reparaciÛ a la BBDD
+	/** Insereix una reparaci√≥ a la BBDD
 	 * @param idMaquina
 	 * @param comerc
 	 * @throws Exception
@@ -104,6 +104,16 @@ public class ControladorReparador {
 		}catch(Exception e){
 			throw new Exception ("Error inserirReparacio: "+e.getMessage());
 		}
+	}
+
+	/** Retorna les m√†quines que t√© un comer√ß
+	 * @param idComerc
+	 * @return LinkedList<Integer>
+	 * @throws Exception 
+	 */
+	public LinkedList<Integer> obtenirMaquinesComerc(int idComerc) throws Exception {
+		LinkedList<Integer> id = maquinaBBDD.obtenirMaquinesXComerc(idComerc);
+		return id;
 	}
 	
 }
