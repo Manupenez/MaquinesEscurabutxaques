@@ -6,6 +6,7 @@ import java.util.List;
 
 import Domini.Comerc;
 import Domini.Contracte;
+import Domini.LineaContracte;
 import Domini.Maquina;
 import Persistencia.ContracteBBDD;
 import Persistencia.ComercBBDD;
@@ -80,13 +81,14 @@ public class ControladorContracte {
 					.recuperarContracteActual(id);
 			contracte.setDataBaixa(new Date());
 			contracteBBDD.posarDataBaixa(contracte);
-			LinkedList<Integer> idmaquines = lineaContracteBBDD
-					.donarBaixaLineas(contracte);
-			for (Integer idmaquina : idmaquines) {
-				Maquina maquina = maquinaBBDD.recuperarMaquina(idmaquina);
+			LinkedList<LineaContracte> lineas = lineaContracteBBDD.recuperarLiniesComerc(contracte);
+			for (LineaContracte lineaContracte : lineas) {
+				lineaContracte.setDataBaixa(new Date());
+				lineaContracteBBDD.donarBaixaLineas(lineaContracte);
+				Maquina maquina = lineaContracte.getMaquina();
 				maquina.setEstatLLesta();
 				maquinaBBDD.modificarEstat(maquina);
-			}
+			}				
 		} catch (Exception e) {
 			throw new Exception("Error baixaContracte - " + e.getMessage());
 		}

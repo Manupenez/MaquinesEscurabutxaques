@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.util.LinkedList;
 
 import Domini.Contracte;
+import Domini.LineaContracte;
 import Domini.Maquina;
 
 public class LineaContracteBBDD {
@@ -14,10 +15,6 @@ public class LineaContracteBBDD {
 
 	public LineaContracteBBDD() throws Exception {
 		this.connexio = this.connexio.getConnexioBBDD();
-	}
-
-	public void tancarConnexio() throws Exception {
-		connexio.close();
 	}
 
 	public void inserirlineaContracte(Contracte cont, Maquina maquina)
@@ -39,10 +36,10 @@ public class LineaContracteBBDD {
 
 	}
 
-	public LinkedList<Integer> donarBaixaLineas(Contracte contracte)
+	public void donarBaixaLineas(LineaContracte lineaContracte)
 			throws Exception {
 		try {
-			String sql = "SELECT idMaquina FROM LineaContracte WHERE idContracte = ?";
+		/*	String sql = "SELECT idMaquina FROM LineaContracte WHERE idContracte = ?";
 			PreparedStatement pst = connexio.prepareStatement(sql);
 			pst.clearParameters();
 			pst.setInt(1, contracte.getId());
@@ -50,18 +47,37 @@ public class LineaContracteBBDD {
 			LinkedList<Integer> llista = new LinkedList<Integer>();
 			while (rs.next()) {
 				llista.add(rs.getInt("idMaquina"));
-			}
+			}*/
 			PreparedStatement pst2 = connexio
 					.prepareStatement("UPDATE LineaContracte SET databaixa = ? WHERE idContracte = ?");
 			pst2.clearParameters();
-			long data = contracte.getDataBaixa().getTime();
+			long data = lineaContracte.getDataBaixa().getTime();
 			pst2.setDate(1, new Date(data));
-			pst2.setInt(2, contracte.getId());
+			pst2.setInt(2, lineaContracte.getIdContracte());
 			pst2.executeQuery();
-			return llista;
+			//return llista;
 		} catch (Exception e) {
-			throw new Exception("Error eliminarlinies - " + e.getMessage());
+			throw new Exception("Error donarBaixaLineas - " + e.getMessage());
 		}
-
 	}
-}
+	
+	public LinkedList<LineaContracte> recuperarLiniesComerc(Contracte contracte) throws Exception{
+		try{
+			MaquinaBBDD maquinaBBDD = new MaquinaBBDD();
+			ContracteBBDD contracteBBDD = new ContracteBBDD();
+			LinkedList<LineaContracte> linies = new LinkedList<LineaContracte>();
+			PreparedStatement pst = connexio
+					.prepareStatement("SELECT dataalta, databaixa, idContracte, idMaquina FROM LineaContracte WHERE idContracte = ?");
+			pst.clearParameters();
+			pst.setInt(1, contracte.getId());
+			ResultSet rs = pst.executeQuery();
+			if (rs.next()) {
+				linies.add(new LineaContracte(rs.getDate("dataalta"), rs.getDate("databaixa"), maquinaBBDD.recuperarMaquina(rs.getInt("idMaquina") , contracteBBDD.recuperarContracte(rs.getInt("idContracte")))); 
+			}
+			return linies;
+		}catch(Exception e){
+			throw new Exception("Error recuperarLiniesComerc - " + e.getMessage());
+		}
+		
+	}
+	}
