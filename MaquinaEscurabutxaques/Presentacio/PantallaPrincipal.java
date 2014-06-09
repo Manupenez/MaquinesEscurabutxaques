@@ -1,5 +1,7 @@
 package Presentacio;
 
+import GestioReparacio;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -9,6 +11,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -37,7 +40,7 @@ public class PantallaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaPrincipal() {
-		setTitle("Màquina Escurabutxaques");
+		setTitle("Mï¿½quina Escurabutxaques");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -56,8 +59,8 @@ public class PantallaPrincipal extends JFrame {
 
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {
-				"Gestió màquina", "Gestió reparacions", "Gestió contrcate",
-				"Gestió recaptacions" }));
+				"Gestiï¿½ mï¿½quina", "Gestiï¿½ reparacions", "Gestiï¿½ contrcate",
+				"Gestiï¿½ recaptacions" }));
 		comboBox.setSelectedIndex(0);
 		comboBox.setBounds(106, 78, 218, 20);
 		contentPane.add(comboBox);
@@ -74,7 +77,10 @@ public class PantallaPrincipal extends JFrame {
 				contracte.setVisible(true);
 				this.dispose();
 			} else {
-				
+				if(comboBox.getSelectedIndex() == 1){
+					GestioReparacio reparacio = new GestioReparacio();
+					reparacio.setVisible(true);
+					this.dispose();
 			}
 		}
 
