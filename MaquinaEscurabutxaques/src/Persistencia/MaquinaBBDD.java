@@ -198,7 +198,7 @@ public class MaquinaBBDD {
 		}
 	}
 
-	// MÃ¨tode que crea maquines amb una id concreta recuperant de BBDD el que
+	// Mètode que crea maquines amb una id concreta recuperant de BBDD el que
 	// necessita
 	public Maquina recuperarMaquina(int id) throws Exception {
 		try {
