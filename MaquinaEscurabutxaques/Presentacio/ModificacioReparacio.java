@@ -45,6 +45,8 @@ public class ModificacioReparacio extends JFrame {
 		lblReparacionsPendents.setBounds(12, 13, 131, 21);
 		contentPane.add(lblReparacionsPendents);
 		
+		omplirPantalla();
+		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -56,19 +58,14 @@ public class ModificacioReparacio extends JFrame {
 		
 		JButton btnNewButton = new JButton("Continuar");
 		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				ModificarReparacioPeces nova = new ModificarReparacioPeces(listReparacions);
+			public void actionPerformed(ActionEvent arg0) {				
+				ModificarPecesReparacio nova = new ModificarPecesReparacio(Integer.parseInt(String.valueOf(listReparacions.getSelectedValue())));
 				nova.setVisible(true);	
 				dispose();
-				/*for (Object reparacio: list.getSelectedValuesList()){
-					controladorReparador.canviarEstatFinalitzat(Integer.parseInt(String.valueOf(reparacio)), idCarcassa, idPlaca);
-				}*/
 			}
 		});
 		btnNewButton.setBounds(222, 86, 142, 47);
 		contentPane.add(btnNewButton);
-			
-		omplirPantalla();
 	}
 	public void omplirPantalla(){
 		LinkedList<Integer> reparacions;
