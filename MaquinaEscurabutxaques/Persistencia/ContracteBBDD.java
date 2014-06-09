@@ -19,12 +19,12 @@ public class ContracteBBDD {
 		connexio.close();
 	}
 	
-	public Contracte recuperarContracteActual(int i) throws Exception {
+	public Contracte recuperarContracte(int idContracte) throws Exception {
 		try {
 			PreparedStatement pst = connexio
-					.prepareStatement("SELECT infocontracte, dataalta, idcontracte FROM Contracte WHERE idComerc = ? AND databaixa IS NULL");
+					.prepareStatement("SELECT infocontracte, dataalta, idcontracte FROM Contracte WHERE idContracte = ?");
 			pst.clearParameters();
-			pst.setInt(1, i);
+			pst.setInt(1, idContracte);
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
 				ComercBBDD comercBBDD = new ComercBBDD();
@@ -34,7 +34,26 @@ public class ContracteBBDD {
 			}
 			return null;
 		} catch (Exception e) {
-			throw new Exception("Error agafarContracte - " + e.getMessage());
+			throw new Exception("Error recuperarContracte - " + e.getMessage());
+		}
+	}
+
+	public Contracte recuperarContracteComerc(int idComerc) throws Exception {
+		try {
+			PreparedStatement pst = connexio
+					.prepareStatement("SELECT infocontracte, dataalta, idcontracte FROM Contracte WHERE idComerc = ? AND databaixa IS NULL");
+			pst.clearParameters();
+			pst.setInt(1, idComerc);
+			ResultSet rs = pst.executeQuery();
+			if (rs.next()) {
+				ComercBBDD comercBBDD = new ComercBBDD();
+				
+				return new Contracte(rs.getString("infocontracte"),
+						rs.getDate("dataalta"),rs.getDate("databaixa"),rs.getDouble("percentatge"),rs.getDouble("pagament"),comercBBDD.recuperarComerc(rs.getInt("idcomerc")),rs.getInt("idContracte"));
+			}
+			return null;
+		} catch (Exception e) {
+			throw new Exception("Error recuperarContracteComerc - " + e.getMessage());
 		}
 	}
 

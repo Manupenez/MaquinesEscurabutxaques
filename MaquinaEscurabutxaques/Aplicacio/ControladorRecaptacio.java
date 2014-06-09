@@ -44,16 +44,20 @@ public class ControladorRecaptacio {
 	 * @param idrecaptacio
 	 * @return Recaptació
 	 */
-	public Recaptacio recuperarRecaptacio(int idrecaptacio){
-		return this.recaptacioBBDD.recuperarRecaptacio(idrecaptacio);
+	public Recaptacio recuperarRecaptacio(int idRecaptacio)throws Exception{
+		try{
+		return this.recaptacioBBDD.recuperarRecaptacio(idRecaptacio);
+		}catch(Exception e){
+			throw new Exception("recuperarRecaptacio - "+e.getMessage());
+		}
 	}
 
 	public double recuperarRecaptacio(Date data) throws Exception {
 		if( data instanceof Date){
 			try{
-			return this.recaptacioBBDD.recuperarValorRecaptacio(data);
+			return this.recaptacioBBDD.recuperarDinersRecaptacio(data);
 			}catch(Exception e){
-				throw new Exception("recuperarRecaptacio "+e.getMessage());
+				throw new Exception("recuperarRecaptacioDATA "+e.getMessage());
 			}
 		}else{
 			throw new Exception("El valor pasat per parametre data no és tipus DATE");
@@ -61,7 +65,7 @@ public class ControladorRecaptacio {
 	}
 	public LinkedList <Date> getDatesRecaptacioMaquina(int idMaquina){
 		try{
-			return this.recaptacioBBDD.recuperarDatesRecaptacio();
+			return this.recaptacioBBDD.recuperarDatesRecaptacio(idMaquina);
 		}catch(Exception e){
 			throw new Exception("getDatesRecaptacioMaquina "+e.getMessage());
 		}
