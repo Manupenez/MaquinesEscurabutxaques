@@ -66,7 +66,10 @@ public class ModificarContracte extends JFrame {
 		});
 		btnAcceptar.setBounds(304, 194, 120, 23);
 		contentPane.add(btnAcceptar);
+		
 		omplenarPantalla();
+		
+		contentPane.updateUI();
 	}
 
 	public void omplenarPantalla() {
@@ -94,8 +97,7 @@ public class ModificarContracte extends JFrame {
 			tirarError("Has de seleccionar un comerç");
 		}else{
 			Contracte contracte;
-			try {
-				
+			try {				
 				contracte = controladorContracte.aconseguirContracte(Integer.parseInt(String.valueOf(list.getSelectedValue())));
 				ModificarContracte2 modificar = new ModificarContracte2(contracte);
 				modificar.setVisible(true);

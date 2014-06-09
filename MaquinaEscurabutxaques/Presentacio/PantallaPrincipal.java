@@ -74,7 +74,7 @@ public class PantallaPrincipal extends JFrame {
 				contracte.setVisible(true);
 				this.dispose();
 			} else {
-
+				
 			}
 		}
 
