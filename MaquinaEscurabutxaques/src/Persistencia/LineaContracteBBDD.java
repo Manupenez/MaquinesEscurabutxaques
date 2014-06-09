@@ -39,15 +39,6 @@ public class LineaContracteBBDD {
 	public void donarBaixaLineas(LineaContracte lineaContracte)
 			throws Exception {
 		try {
-		/*	String sql = "SELECT idMaquina FROM LineaContracte WHERE idContracte = ?";
-			PreparedStatement pst = connexio.prepareStatement(sql);
-			pst.clearParameters();
-			pst.setInt(1, contracte.getId());
-			ResultSet rs = pst.executeQuery();
-			LinkedList<Integer> llista = new LinkedList<Integer>();
-			while (rs.next()) {
-				llista.add(rs.getInt("idMaquina"));
-			}*/
 			PreparedStatement pst2 = connexio
 					.prepareStatement("UPDATE LineaContracte SET databaixa = ? WHERE idContracte = ?");
 			pst2.clearParameters();
@@ -55,7 +46,6 @@ public class LineaContracteBBDD {
 			pst2.setDate(1, new Date(data));
 			pst2.setInt(2, lineaContracte.getIdContracte());
 			pst2.executeQuery();
-			//return llista;
 		} catch (Exception e) {
 			throw new Exception("Error donarBaixaLineas - " + e.getMessage());
 		}
@@ -72,7 +62,7 @@ public class LineaContracteBBDD {
 			pst.setInt(1, contracte.getId());
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
-				linies.add(new LineaContracte(rs.getDate("dataalta"), rs.getDate("databaixa"), maquinaBBDD.recuperarMaquina(rs.getInt("idMaquina") , contracteBBDD.recuperarContracte(rs.getInt("idContracte")))); 
+				//linies.add(new LineaContracte(rs.getDate("dataalta"), rs.getDate("databaixa"), maquinaBBDD.recuperarMaquina(rs.getInt("idMaquina") , contracteBBDD.recuperarContracte(rs.getInt("idContracte")))); 
 			}
 			return linies;
 		}catch(Exception e){
