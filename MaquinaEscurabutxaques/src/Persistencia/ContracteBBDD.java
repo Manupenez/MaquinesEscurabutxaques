@@ -17,7 +17,24 @@ public class ContracteBBDD {
 	public void tancarConnexio() throws Exception {
 		connexio.close();
 	}
-
+	public Contracte recuperarContracte (int idContracte) throws Exception{
+		try{
+			PreparedStatement pst =connexio.prepareStatement("SELECT * FROM contracte WHERE idContracte = ?");
+			pst.clearParameters();
+			pst.setInt(1, idContracte);
+			ResultSet rs = pst.executeQuery();
+			if(rs.next()){
+				double pagament,percentatge;
+				
+				pagament = rs.getDouble("pagament");
+				if(rs.wasNull()) {
+					pagament = -1;
+				}
+				
+				percentatge = rs.getDouble("percentatge");
+				if(rs.wasNull()) {
+					percentatge = -1;
+				}
 	public Contracte recuperarContracteActual(int i) throws Exception {
 		try {
 			PreparedStatement pst = connexio
