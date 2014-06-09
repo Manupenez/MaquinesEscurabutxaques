@@ -5,12 +5,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
+
 import Domini.Carcassa;
 import Domini.Comerc;
 import Domini.Maquina;
 import Domini.Placa;
 import Domini.Tecnic;
-
+//metode obternirMaquines() afegit
 public class MaquinaBBDD {
 	private ConnexioBBDD connexio;
 	private CarcassaBBDD carcassaBBDD;
@@ -151,7 +152,7 @@ public class MaquinaBBDD {
 					+ e.getMessage());
 		}
 	}
-
+//CANVIADA DESCRIPCI� ERROR
 	// Mètode que retorna una llista amb les id de les màquines que estan en un
 	// estat concret passat per paràmetre
 	public LinkedList<Integer> obtenirMaquines(String estat) throws Exception {
@@ -169,7 +170,7 @@ public class MaquinaBBDD {
 			}
 			return maquines;
 		} catch (Exception e) {
-			throw new Exception("Error obtenirMaquines - " + e.getMessage());
+			throw new Exception("Error obtenirMaquines amb estat - " + e.getMessage());
 		}
 	}
 
@@ -249,6 +250,24 @@ public class MaquinaBBDD {
 		}
 		catch(Exception e){
 			throw new Exception("Error obtenir màquines per comerç");
+		}
+	}
+//retorna totes les idM�quines de la BBDD
+	public LinkedList<Integer> obtenirMaquines() throws Exception {
+		try {
+			String sql = "SELECT idmaquina FROM Maquina";
+			LinkedList<Integer> maquines = new LinkedList<Integer>();
+			PreparedStatement pstm;
+			ResultSet rs;
+			pstm = connexio.prepareStatement(sql);
+			pstm.clearParameters();
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				maquines.add(rs.getInt("idmaquina"));
+			}
+			return maquines;
+		} catch (Exception e) {
+			throw new Exception("Error obtenirMaquines - " + e.getMessage());
 		}
 	}
 

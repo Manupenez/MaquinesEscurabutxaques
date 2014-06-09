@@ -119,6 +119,5 @@ public class ModificarPecesReparacio extends JFrame {
 	public void tirarError(String missatge) {
 		JOptionPane.showMessageDialog(new JFrame(), missatge, "Error",
 				JOptionPane.ERROR_MESSAGE);
-	}	
-
+	}
 }

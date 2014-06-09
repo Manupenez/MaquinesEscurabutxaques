@@ -26,9 +26,6 @@ public class RecaptacioBBDD {
 		}
 		
 	}
-	public Recaptacio recuperarRecaptacio(int idrecaptacio) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	
 }

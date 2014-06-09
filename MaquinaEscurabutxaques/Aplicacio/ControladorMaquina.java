@@ -7,7 +7,7 @@ import Domini.Maquina;
 import Domini.Placa;
 import Domini.Tecnic;
 import Persistencia.*;
-
+//he afegit un metode obtenirMaquines()
 public class ControladorMaquina {
 
 	private Maquina maquina;
@@ -166,6 +166,14 @@ public class ControladorMaquina {
 			maquinaBBDD.setTecnicRevisar(maquina);
 			} catch (Exception e) {
 			throw new Exception("Error canviarEstatOK - " + e.getMessage());
+		}
+	}
+//obtenim totes les idmaquines de la BBDD
+	public LinkedList<Integer> obtenirMaquines() throws Exception{
+		try {
+			return this.maquinaBBDD.obtenirMaquines();
+		} catch (Exception e) {
+			throw new Exception("Error obtenirMaquines - " + e.getMessage());
 		}
 	}
 
