@@ -80,7 +80,7 @@ public class NouContracte extends JFrame {
 						tirarError(e1.getMessage());
 					}
 				} else {
-					tirarError("Has de seleccionar un comerç i mínim una màquina");
+					tirarError("Has de seleccionar un comerï¿½ i mï¿½nim una mï¿½quina");
 				}
 			}
 		});
@@ -128,9 +128,7 @@ public class NouContracte extends JFrame {
 		LinkedList<Integer> comercos;
 		LinkedList<Integer> maquines;
 		try {
-
-			maquines = controladorContracte.obtenirMaquines("LLESTA");
-
+			maquines = controladorContracte.obtenirMaquinesLlestes("LLESTA");
 			comercos = controladorContracte.comercSenseContracte();
 			if (!comercos.isEmpty()) {
 				modelComerc = new DefaultListModel();
@@ -161,7 +159,7 @@ public class NouContracte extends JFrame {
 					tirarError("No hi ha Maquines llestes per distribuÃ¯r");
 				}
 			} else {
-				tirarError("No hi ha Comerços sense contracte");
+				tirarError("No hi ha Comerï¿½os sense contracte");
 			}
 
 		} catch (Exception e) {

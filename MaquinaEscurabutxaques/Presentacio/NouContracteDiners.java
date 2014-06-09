@@ -46,7 +46,6 @@ public class NouContracteDiners extends JFrame {
 		try {
 			controladorContracte = new ControladorContracte();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			tirarError(e.getMessage());
 		}
 
@@ -55,20 +54,20 @@ public class NouContracteDiners extends JFrame {
 		} catch (Exception e) {
 			tirarError(e.getMessage());
 		}
-		if (tipusComerc == "MINORISTA") {
+		if (tipusComerc.equals("MAJORISTA")) {
 			JLabel lblPercentatge = new JLabel("Percentatge");
-			lblPercentatge.setBounds(47, 83, 88, 14);
+			lblPercentatge.setBounds(25, 82, 88, 14);
 			contentPane.add(lblPercentatge);
 
 			textPercentatge = new JTextField();
-			textPercentatge.setBounds(181, 133, 117, 20);
+			textPercentatge.setBounds(165, 79, 133, 20);
 			contentPane.add(textPercentatge);
 			textPercentatge.setColumns(10);
 
 			JButton btnOk1 = new JButton("OK");
 			btnOk1.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
-					String diners = textPercentatge.getSelectedText();
+					String diners = textPercentatge.getText();
 					if (diners.length() < 1) {
 						tirarError("S'ha d'omplenar el percentetge");
 					} else {
@@ -80,7 +79,7 @@ public class NouContracteDiners extends JFrame {
 								nouContracteFinalitzat(percentatge, -1);
 							}
 						} catch (Exception e) {
-							tirarError("El percentatge ha de ser un número - "
+							tirarError("El percentatge ha de ser un nÃºmero - "
 									+ e.getMessage());
 						}
 
@@ -91,19 +90,19 @@ public class NouContracteDiners extends JFrame {
 			contentPane.add(btnOk1);
 		} else {
 			JLabel lblPagamentMensual = new JLabel("Pagament mensual");
-			lblPagamentMensual.setBounds(47, 136, 112, 14);
+			lblPagamentMensual.setBounds(25, 136, 128, 14);
 			contentPane.add(lblPagamentMensual);
 
 			textPagamentMensual = new JTextField();
-			textPagamentMensual.setBounds(181, 80, 117, 20);
+			textPagamentMensual.setBounds(165, 133, 133, 20);
 			contentPane.add(textPagamentMensual);
 			textPagamentMensual.setColumns(10);
 
 			JButton btnOk2 = new JButton("OK");
 			btnOk2.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					String diners = textPagamentMensual.getSelectedText();
-					if (diners.length() < 1) {
+					String diners = textPagamentMensual.getText();
+					if (!(diners.length() > 0)) {
 						tirarError("S'ha d'omplenar el pagament mensual");
 					} else {
 						try {
@@ -114,7 +113,7 @@ public class NouContracteDiners extends JFrame {
 								nouContracteFinalitzat(-1, pagament);
 							}
 						} catch (Exception e2) {
-							tirarError("El pagament mensual ha de ser un número - "
+							tirarError("El pagament mensual ha de ser un nÃºmero - "
 									+ e2.getMessage());
 						}
 
@@ -125,13 +124,13 @@ public class NouContracteDiners extends JFrame {
 			contentPane.add(btnOk2);
 		}
 
-		JButton btnCancellar = new JButton("Cancel·lar");
+		JButton btnCancellar = new JButton("CancelÂ·lar");
 		btnCancellar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				tornarEnrere();
 			}
 		});
-		btnCancellar.setBounds(335, 228, 89, 23);
+		btnCancellar.setBounds(309, 228, 115, 23);
 		contentPane.add(btnCancellar);
 	}
 

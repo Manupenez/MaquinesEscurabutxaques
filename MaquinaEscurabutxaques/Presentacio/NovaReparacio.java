@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.LinkedList;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -14,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Aplicacio.ControladorContracte;
 import Aplicacio.ControladorMaquina;
 import Aplicacio.ControladorReparador;
 
@@ -27,6 +29,9 @@ public class NovaReparacio extends JFrame {
 	private JList listMaquines;
 	private ControladorReparador controladorReparador;
 	private ControladorMaquina controladorMaquina;
+	private ControladorContracte controladorContracte;
+	private DefaultListModel modelClients;
+	private DefaultListModel modelMaquines;
 	private JButton btnClient;
 	private JButton btnMaquina;
 
@@ -42,7 +47,7 @@ public class NovaReparacio extends JFrame {
 
 		try {
 			controladorReparador = new ControladorReparador();
-			controladorMaquina = new ControladorMaquina();
+			controladorContracte = new ControladorContracte();
 		} catch (Exception e1) {
 			tirarError(e1.getMessage());
 		}
@@ -63,14 +68,21 @@ public class NovaReparacio extends JFrame {
 	}
 
 	private void omplirPantalla() {
-		listClients = new JList();
-		listClients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		listClients.setBounds(25, 54, 146, 165);
-		contentPane.add(listClients);
-
-		listMaquines = new JList();
-		listMaquines.setBounds(208, 54, 146, 165);
-		contentPane.add(listMaquines);
+		LinkedList<Integer> comercos;
+		
+		try{
+			comercos = controladorContracte.comercAmbContracte();
+			modelClients = new DefaultListModel();
+			for(Integer client : comercos){
+				modelClients.addElement(client);
+			}
+			listClients = new JList(modelClients);
+			listClients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			listClients.setBounds(25, 54, 146, 165);
+			contentPane.add(listClients);
+		}catch(Exception e){
+			tirarError("No hi ha cap comerç amb contracte");
+		}
 
 		JLabel lblEscollirClient = new JLabel("Escollir Client:");
 		lblEscollirClient.setBounds(25, 26, 91, 16);
@@ -81,6 +93,25 @@ public class NovaReparacio extends JFrame {
 		contentPane.add(lblEscollirMquina);
 
 		btnMaquina = new JButton("Acceptar");
+		btnMaquina.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (listMaquines.isSelectionEmpty()) {
+					tirarError("Has de seleccionar les màquines que s'han de reparar");
+				} else {
+					try {
+						for (Object maquina : listMaquines
+								.getSelectedValuesList()) {
+							controladorReparador.inserirReparacio(Integer
+									.parseInt(String.valueOf(maquina)), Integer
+									.parseInt(String.valueOf(listClients
+											.getSelectedValue())));
+						}
+					} catch (Exception e1) {
+						tirarError(e1.getMessage());
+					}
+				}
+			}
+		});
 		btnMaquina.setEnabled(false);
 		btnMaquina.setBounds(230, 231, 124, 29);
 		contentPane.add(btnMaquina);
@@ -93,13 +124,20 @@ public class NovaReparacio extends JFrame {
 				} else {
 					btnClient.setEnabled(false);
 					btnMaquina.setEnabled(true);
-
 					try {
 						LinkedList<Integer> maquines = controladorReparador.obtenirMaquinesComerc(Integer
 								.parseInt(String.valueOf(listClients
 										.getSelectedValue())));
+						modelMaquines = new DefaultListModel();
+						for(Integer maquina : maquines){
+							modelMaquines.addElement(Integer.parseInt(String.valueOf(maquina)));
+						}
+						listMaquines = new JList(modelMaquines);
+						listMaquines.setBounds(208, 54, 146, 165);
+						contentPane.add(listMaquines);
+						contentPane.updateUI();
 					} catch (Exception e1) {
-
+						tirarError(e1.getMessage());
 					}
 				}
 			}
