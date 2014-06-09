@@ -44,7 +44,7 @@ public class ContracteBBDD {
 				}
 			return null;
 		}catch (Exception e) {
-			throw new Exception("Error agafarContracte - " + e.getMessage());
+			throw new Exception("Error recuperarContracte - " + e.getMessage());
 		}
 	}
 	public Contracte recuperarContracteComerc(int idComerc) throws Exception {
@@ -62,7 +62,7 @@ public class ContracteBBDD {
 			}
 			return null;
 		} catch (Exception e) {
-			throw new Exception("Error agafarContracte - " + e.getMessage());
+			throw new Exception("Error recuperarContracteComerc - " + e.getMessage());
 		}
 	}
 
