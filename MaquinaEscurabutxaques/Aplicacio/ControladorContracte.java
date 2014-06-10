@@ -37,7 +37,7 @@ public class ControladorContracte {
 	public Contracte aconseguirContracte(int idComerc) throws Exception {
 		// canviat el return void a return int
 		try {
-			return this.contracteBBDD.recuperarContracteActual(idComerc);
+			return this.contracteBBDD.recuperarContracteComerc(idComerc);
 		} catch (Exception e) {
 			throw new Exception("Error aconseguirContracte - " + e.getMessage());
 		}
@@ -78,7 +78,7 @@ public class ControladorContracte {
 	public void baixaContracte(int id) throws Exception {
 		try {
 			Contracte contracte = this.contracteBBDD
-					.recuperarContracteActual(id);
+					.recuperarContracteComerc(id);
 			contracte.setDataBaixa(new Date());
 			contracteBBDD.posarDataBaixa(contracte);
 			LinkedList<LineaContracte> lineas = lineaContracteBBDD.recuperarLiniesComerc(contracte);

@@ -35,7 +35,7 @@ public class InformacioRecaptacioMaquina extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InformacioRecaptacioMaquina(int idMaquina) {
+	public InformacioRecaptacioMaquina(int idmaquina) {
 		
 		this.idMaquina = idMaquina;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,7 +77,7 @@ public class InformacioRecaptacioMaquina extends JFrame {
 				if(!datesRecaptacio.isSelectionEmpty()){
 					textField.setText("");
 					try {
-						textField.setText(Double.toString(controladorRecaptacio.recuperarRecaptacio((Date)(datesRecaptacio.getSelectedValue()))));
+						textField.setText(Double.toString(controladorRecaptacio.recuperarRecaptacio((Date)(datesRecaptacio.getSelectedValue()),idMaquina)));
 					} catch (Exception e) {
 						tirarError(e.getMessage());
 					}

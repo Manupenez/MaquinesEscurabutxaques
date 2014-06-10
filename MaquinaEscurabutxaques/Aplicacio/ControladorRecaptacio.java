@@ -23,7 +23,7 @@ public class ControladorRecaptacio {
 		this.contracteBBDD = new ContracteBBDD ();
 	}
 	
-	/** Mï¿½tode que genera un informe i l'introdueix a BBDD.
+	/** Mètode que genera un informe i l'introdueix a BBDD.
 	 * @param idmaquina
 	 * @param idcontracte
 	 * @param dinersMaquina
@@ -32,7 +32,7 @@ public class ControladorRecaptacio {
 	public void crearInformeRecaptacio(int idmaquina, int idcontracte, int dinersMaquina) throws Exception{
 		try{
 		Maquina maquina = maquinaBBDD.recuperarMaquina(idmaquina);
-		Contracte contracte = contracteBBDD.recuperarContracteComerc(idcontracte);		
+		Contracte contracte = contracteBBDD.recuperarContracteActual(idcontracte);		
 		Recaptacio recaptacio = new Recaptacio(maquina, contracte, dinersMaquina);	
 		this.recaptacioBBDD.inserirRecaptacio(recaptacio);
 		}catch (Exception e) {
@@ -40,9 +40,9 @@ public class ControladorRecaptacio {
 		}
 	}
 	
-	/** Mï¿½tode que retorna l'objecte Recaptaciï¿½ amb l'id que es passa per parï¿½metre.
+	/** Mètode que retorna l'objecte Recaptació amb l'id que es passa per paràmetre.
 	 * @param idrecaptacio
-	 * @return Recaptaciï¿½
+	 * @return Recaptació
 	 */
 	public Recaptacio recuperarRecaptacio(int idRecaptacio)throws Exception{
 		try{
@@ -52,18 +52,18 @@ public class ControladorRecaptacio {
 		}
 	}
 
-	public double recuperarRecaptacio(Date data) throws Exception {
+	public double recuperarRecaptacio(Date data, int idmaquina) throws Exception {
 		if( data instanceof Date){
 			try{
-			return this.recaptacioBBDD.recuperarDinersRecaptacio(data);
+			return this.recaptacioBBDD.recuperarDinersRecaptacio(data,idmaquina);
 			}catch(Exception e){
 				throw new Exception("recuperarRecaptacioDATA "+e.getMessage());
 			}
 		}else{
-			throw new Exception("El valor pasat per parametre data no ï¿½s tipus DATE");
+			throw new Exception("El valor pasat per parametre data no és tipus DATE");
 		}
 	}
-	public LinkedList <Date> getDatesRecaptacioMaquina(int idMaquina){
+	public LinkedList <Date> getDatesRecaptacioMaquina(int idMaquina) throws Exception{
 		try{
 			return this.recaptacioBBDD.recuperarDatesRecaptacio(idMaquina);
 		}catch(Exception e){
