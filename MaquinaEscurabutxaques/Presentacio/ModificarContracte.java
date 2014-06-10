@@ -43,7 +43,7 @@ public class ModificarContracte extends JFrame {
 			tirarError(e1.getMessage());
 		}
 
-		JButton btnCancellar = new JButton("Cancel·lar");
+		JButton btnCancellar = new JButton("CancelÂ·lar");
 		btnCancellar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tornarEnrere();
@@ -54,7 +54,7 @@ public class ModificarContracte extends JFrame {
 		contentPane.add(btnCancellar);
 
 		JLabel lblTriaElComer = new JLabel(
-				"Tria el comerç que vols modificar el contrcate");
+				"Tria el comerÃ§ que vols modificar el contrcate");
 		lblTriaElComer.setBounds(54, 26, 326, 14);
 		contentPane.add(lblTriaElComer);
 
@@ -94,7 +94,7 @@ public class ModificarContracte extends JFrame {
 	
 	public void passarPantallaSeguent(){
 		if(list.isSelectionEmpty()){
-			tirarError("Has de seleccionar un comerç");
+			tirarError("Has de seleccionar un comerÃ§");
 		}else{
 			Contracte contracte;
 			try {				

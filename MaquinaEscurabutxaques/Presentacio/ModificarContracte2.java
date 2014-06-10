@@ -30,14 +30,18 @@ public class ModificarContracte2 extends JFrame {
 	private JTextField textPagament;
 	private JTextField textPercentatge;
 	private JList listMaquinesAfegir;
-	private JList listMaquinesTreure; 
+	private JList listMaquinesTreure;
 	private DefaultListModel modelMaquinesTreure;
 	private DefaultListModel modelMaquinesAfegir;
+	private JTextField textInformacio;
+	private Contracte cont;
+
 	/**
 	 * Create the frame.
 	 */
-	
+
 	public ModificarContracte2(Contracte contracte) {
+		cont = contracte;
 		setTitle("Modificar Contracte");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 581, 364);
@@ -46,7 +50,7 @@ public class ModificarContracte2 extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JButton btnCancellar = new JButton("Cancel�lar");
+		JButton btnCancellar = new JButton("Cancel·lar");
 		btnCancellar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				tornarEnrere();
@@ -58,91 +62,142 @@ public class ModificarContracte2 extends JFrame {
 		JButton btnAcceptar = new JButton("Acceptar");
 		btnAcceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				completarModificacio();
+				completarModificacio(cont);
 			}
 		});
 		btnAcceptar.setBounds(466, 258, 89, 23);
 		contentPane.add(btnAcceptar);
-		
+
 		try {
 			controladorContracte = new ControladorContracte();
 		} catch (Exception e) {
 			tirarError(e.getMessage());
 		}
-		
+
 		omplenarPantalla(contracte);
 
 	}
 
 	public void omplenarPantalla(Contracte contracte) {
-		try{
-		JTextPane txtpnSeleccionaLesMaquines = new JTextPane();
-		txtpnSeleccionaLesMaquines.setEditable(false);
-		txtpnSeleccionaLesMaquines
-				.setText("Selecciona les maquines per afegir al contracte");
-		txtpnSeleccionaLesMaquines.setBounds(20, 11, 127, 34);
-		contentPane.add(txtpnSeleccionaLesMaquines);
+		try {
 
-		JTextPane txtpnSeleccionaLesMaquines_1 = new JTextPane();
-		txtpnSeleccionaLesMaquines_1
-				.setText("Selecciona les maquines que vulguis treure del contracte\r\n");
-		txtpnSeleccionaLesMaquines_1.setEditable(false);
-		txtpnSeleccionaLesMaquines_1.setBounds(180, 11, 155, 34);
-		contentPane.add(txtpnSeleccionaLesMaquines_1);
-		
-		LinkedList<Integer> maquinesTreure = controladorContracte.maquinesDelContracte(contracte);
-		modelMaquinesTreure = new DefaultListModel();
-		for (Integer maquina : maquinesTreure) {
-			modelMaquinesTreure.addElement(maquina);
-		}
-		
-		LinkedList<Integer> maquinesAfegir = controladorContracte.obtenirMaquines("LLESTA");
-		modelMaquinesAfegir = new DefaultListModel();
-		for (Integer maquina : maquinesAfegir) {
-			modelMaquinesAfegir.addElement(maquina);
-		}
-				
-		listMaquinesAfegir = new JList(modelMaquinesAfegir);
-		listMaquinesAfegir.setBounds(20, 56, 116, 195);
-		contentPane.add(listMaquinesAfegir);
-		
-		listMaquinesTreure = new JList(modelMaquinesTreure);
-		listMaquinesTreure.setBounds(180, 56, 127, 195);
-		contentPane.add(listMaquinesTreure);
-		
-		JLabel lblInformaci = new JLabel("Informaci�");
-		lblInformaci.setBounds(357, 31, 68, 14);
-		contentPane.add(lblInformaci);
-		
-		JTextPane textInformacio = new JTextPane();
-		textInformacio.setBounds(357, 56, 198, 56);
-		contentPane.add(textInformacio);
+			LinkedList<Integer> maquinesTreure = controladorContracte
+					.maquinesDelContracte(contracte);
+			modelMaquinesTreure = new DefaultListModel();
+			for (Integer maquina : maquinesTreure) {
+				modelMaquinesTreure.addElement(maquina);
+			}
 
-		String tipus = contracte.getTipusComerc();
-		if (tipus.equals("MAJORISTA")) {
-			textPercentatge = new JTextField();
-			textPercentatge.setBounds(357, 216, 140, 20);
-			contentPane.add(textPercentatge);
-			textPercentatge.setColumns(10);
+			LinkedList<Integer> maquinesAfegir = controladorContracte
+					.obtenirMaquinesLlestes();
+			modelMaquinesAfegir = new DefaultListModel();
+			for (Integer maquina : maquinesAfegir) {
+				modelMaquinesAfegir.addElement(maquina);
+			}
 
-			JLabel lblPercentatge = new JLabel("Percentatge");
-			lblPercentatge.setBounds(357, 191, 106, 14);
-			contentPane.add(lblPercentatge);
-		} else {
-			JLabel lblPagament = new JLabel("Pagament mensual");
-			lblPagament.setBounds(357, 123, 106, 14);
-			contentPane.add(lblPagament);
+			listMaquinesAfegir = new JList(modelMaquinesAfegir);
+			listMaquinesAfegir.setBounds(20, 56, 127, 195);
+			contentPane.add(listMaquinesAfegir);
 
-			textPagament = new JTextField();
-			textPagament.setBounds(357, 148, 140, 20);
-			contentPane.add(textPagament);
-			textPagament.setColumns(10);
-		}}catch(Exception e){
+			listMaquinesTreure = new JList(modelMaquinesTreure);
+			listMaquinesTreure.setBounds(180, 56, 127, 195);
+			contentPane.add(listMaquinesTreure);
+
+			JLabel lblInformaci = new JLabel("Informació");
+			lblInformaci.setBounds(357, 31, 68, 14);
+			contentPane.add(lblInformaci);
+
+			textInformacio = new JTextField(contracte.getInformacio());
+			textInformacio.setBounds(357, 56, 198, 56);
+			contentPane.add(textInformacio);
+
+			JLabel lblAfegirMquines = new JLabel("Afegir Màquines:");
+			lblAfegirMquines.setBounds(20, 30, 116, 16);
+			contentPane.add(lblAfegirMquines);
+
+			JLabel lblTreureMquines = new JLabel("Treure Màquines");
+			lblTreureMquines.setBounds(180, 28, 127, 16);
+			contentPane.add(lblTreureMquines);
+
+			String tipus = contracte.getTipusComerc();
+			if (tipus.equals("MAJORISTA")) {
+				textPercentatge = new JTextField(String.valueOf(contracte
+						.getPercentatge()));
+				textPercentatge.setBounds(357, 216, 140, 20);
+				contentPane.add(textPercentatge);
+				textPercentatge.setColumns(10);
+
+				JLabel lblPercentatge = new JLabel("Percentatge");
+				lblPercentatge.setBounds(357, 191, 106, 14);
+				contentPane.add(lblPercentatge);
+			} else {
+				JLabel lblPagament = new JLabel("Pagament mensual");
+				lblPagament.setBounds(357, 123, 106, 14);
+				contentPane.add(lblPagament);
+
+				textPagament = new JTextField(String.valueOf(contracte
+						.getPagament()));
+				textPagament.setBounds(357, 148, 140, 20);
+				contentPane.add(textPagament);
+				textPagament.setColumns(10);
+			}
+		} catch (Exception e) {
 			tirarError(e.getMessage());
 		}
 	}
 
-	public void completarModificacio() {
+	public void completarModificacio(Contracte contracte) {
+		try {
+			double pagament = contracte.getPagament();
+			double percentatge = contracte.getPercentatge();
+			if (contracte.getTipusComerc().equals("MAJORISTA")) {
+				String diners = textPercentatge.getText();
+				if (diners.length() < 1) {
+					tirarError("S'ha d'omplenar el percentetge");
+				} else {
+					percentatge = Double.parseDouble(diners);
+					if (percentatge < 0 || percentatge > 100) {
+						tirarError("El percentatge ha d'estar entre 0 i 100");
+					} else {
+						pagament = -1;
+					}
+				}
+			} else {
+				String diners = textPagament.getText();
+				if (!(diners.length() > 0)) {
+					tirarError("S'ha d'omplenar el pagament mensual");
+				} else {
+					pagament = Double.parseDouble(diners);
+					if (pagament < 0) {
+						tirarError("El pagament mensual ha de ser 0 o positiu.");
+					} else {
+						percentatge = -1;
+					}
+				}
+			}
+			LinkedList<Integer> maquinesNouContracte = controladorContracte
+					.maquinesDelContracte(contracte);
+			if (!listMaquinesTreure.isSelectionEmpty()) {
+				for (Object maquina : listMaquinesTreure
+						.getSelectedValuesList()) {
+					maquinesNouContracte.remove(maquina);
+				}
+			}
+			if (!listMaquinesAfegir.isSelectionEmpty()) {
+				for (Object maquina : listMaquinesAfegir
+						.getSelectedValuesList()) {
+					maquinesNouContracte.add(Integer.parseInt(String
+							.valueOf(maquina)));
+				}
+			}
+			System.out.println("3");
+			controladorContracte.modificarContracte(contracte,
+					textInformacio.getText(), maquinesNouContracte,
+					percentatge, pagament);
+			tornarEnrere();
+		} catch (Exception e) {
+			tirarError(e.getMessage());
+		}
 
 	}
 
