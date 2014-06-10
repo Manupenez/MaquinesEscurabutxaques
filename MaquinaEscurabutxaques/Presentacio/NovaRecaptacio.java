@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
+import Aplicacio.ControladorContracte;
 import Aplicacio.ControladorRecaptacio;
 
 import java.awt.event.ActionListener;
@@ -21,6 +22,7 @@ public class NovaRecaptacio extends JFrame {
 	private JPanel contentPane;
 	private JTextField dinersMaquina;
 	private ControladorRecaptacio controladorRecaptacio;
+	private ControladorContracte controladorContracte;
 	private int idMaquina;
 
 	/**

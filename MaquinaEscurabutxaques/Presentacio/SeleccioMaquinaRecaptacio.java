@@ -64,7 +64,7 @@ public class SeleccioMaquinaRecaptacio extends JFrame {
 		JButton btnNewButton = new JButton("Inserir Recaptaci\u00F3");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				new NovaRecaptacio();
+				new NovaRecaptacio(Integer.parseInt(listIdMaquines.getSelectedValue().toString()));
 			}
 		});
 		btnNewButton.setBounds(246, 121, 152, 35);
