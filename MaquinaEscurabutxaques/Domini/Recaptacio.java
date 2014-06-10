@@ -14,6 +14,7 @@ public class Recaptacio {
 		this.dinersMaquina=dinersMaquina;
 		this.data= new Date();
 }
+	//és necesari??
 	public Recaptacio(Maquina maquina, Contracte contracte, int dinersMaquina,Date data){
 		this.maquina=maquina;
 		this.contracte=contracte;

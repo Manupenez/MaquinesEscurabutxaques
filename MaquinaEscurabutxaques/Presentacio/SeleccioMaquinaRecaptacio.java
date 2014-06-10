@@ -43,13 +43,13 @@ public class SeleccioMaquinaRecaptacio extends JFrame {
 		lblSeleccionaMaquina.setBounds(27, 13, 126, 25);
 		contentPane.add(lblSeleccionaMaquina);
 		
-		JButton btnAcceptar = new JButton("Acceptar");
+		JButton btnAcceptar = new JButton("Veure Recaptacions");
 		btnAcceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new InformacioRecaptacioMaquina(Integer.parseInt(listIdMaquines.getSelectedValue().toString()));
 			}
 		});
-		btnAcceptar.setBounds(249, 87, 105, 35);
+		btnAcceptar.setBounds(246, 47, 152, 35);
 		contentPane.add(btnAcceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -60,6 +60,15 @@ public class SeleccioMaquinaRecaptacio extends JFrame {
 		});
 		btnCancelar.setBounds(323, 215, 97, 25);
 		contentPane.add(btnCancelar);
+		
+		JButton btnNewButton = new JButton("Inserir Recaptaci\u00F3");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new NovaRecaptacio();
+			}
+		});
+		btnNewButton.setBounds(246, 121, 152, 35);
+		contentPane.add(btnNewButton);
 	}
 	public void omplirPantalla(){
 		try{
@@ -85,5 +94,4 @@ public class SeleccioMaquinaRecaptacio extends JFrame {
 		JOptionPane.showMessageDialog(new JFrame(), missatge, "Error",
 				JOptionPane.ERROR_MESSAGE);
 	}
-
 }

@@ -90,8 +90,8 @@ public class InformacioRecaptacioMaquina extends JFrame {
 		omplirPantalla();		
 	}
 	public void omplirPantalla(){
-		LinkedList<Date> dates = controladorRecaptacio.getDatesRecaptacioMaquina(idMaquina);
 		try{
+		LinkedList<Date> dates = controladorRecaptacio.getDatesRecaptacioMaquina(idMaquina);		
 			for(Date data: dates){
 				llistaDates.addElement(data);
 			}
