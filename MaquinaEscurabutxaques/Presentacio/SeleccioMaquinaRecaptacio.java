@@ -18,34 +18,18 @@ import Aplicacio.ControladorMaquina;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.LinkedList;
-//classe nova
-public class SeleccióMàquinaRecaptació extends JFrame {
+public class SeleccioMaquinaRecaptacio extends JFrame {
 
 	private JPanel contentPane;
 	private JList listIdMaquines;
 	private DefaultListModel llistaMaquines;
 	private ControladorMaquina controladorMaquina;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					SeleccióMàquinaRecaptació frame = new SeleccióMàquinaRecaptació();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public SeleccióMàquinaRecaptació() {
+	public SeleccioMaquinaRecaptacio() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -53,24 +37,20 @@ public class SeleccióMàquinaRecaptació extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		listIdMaquines = new JList();
-		listIdMaquines.setBounds(27, 51, 126, 163);
-		contentPane.add(listIdMaquines);
-		
 		omplirPantalla();
 		
 		JLabel lblSeleccionaMaquina = new JLabel("Selecciona Maquina");
 		lblSeleccionaMaquina.setBounds(27, 13, 126, 25);
 		contentPane.add(lblSeleccionaMaquina);
 		
-		JButton btnContinuar = new JButton("Continuar");
-		btnContinuar.addActionListener(new ActionListener() {
+		JButton btnAcceptar = new JButton("Acceptar");
+		btnAcceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				new InformacioRecaptacioMaquina(Integer.parseInt(listIdMaquines.getSelectedValue().toString()));
 			}
 		});
-		btnContinuar.setBounds(249, 87, 105, 35);
-		contentPane.add(btnContinuar);
+		btnAcceptar.setBounds(249, 87, 105, 35);
+		contentPane.add(btnAcceptar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
@@ -82,14 +62,14 @@ public class SeleccióMàquinaRecaptació extends JFrame {
 		contentPane.add(btnCancelar);
 	}
 	public void omplirPantalla(){
-		LinkedList<Integer> maquines = controladorMaquina.obtenirMaquines();
 		try{
+			LinkedList<Integer> maquines = controladorMaquina.obtenirMaquines();
 			for(Integer maquina: maquines){
 				llistaMaquines.addElement(maquina);
 			}
 			listIdMaquines = new JList(llistaMaquines);
 			listIdMaquines.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-			listIdMaquines.setBounds(10, 47, 133, 193);
+			listIdMaquines.setBounds(20, 47, 133, 193);
 			contentPane.add(listIdMaquines);	
 			
 		}catch(Exception e){

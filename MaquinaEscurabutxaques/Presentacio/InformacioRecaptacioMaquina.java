@@ -63,7 +63,7 @@ public class InformacioRecaptacioMaquina extends JFrame {
 		contentPane.add(lblRecaptaci);
 		
 		datesRecaptacio = new JList();
-		datesRecaptacio.setBounds(0, 35, 143, 205);
+		datesRecaptacio.setBounds(10, 35, 143, 205);
 		contentPane.add(datesRecaptacio);
 		
 		textField = new JTextField();

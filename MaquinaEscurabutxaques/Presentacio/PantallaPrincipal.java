@@ -1,6 +1,5 @@
 package Presentacio;
 
-
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -58,8 +57,8 @@ public class PantallaPrincipal extends JFrame {
 
 		comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {
-				"Gesti� m�quina", "Gesti� reparacions", "Gesti� contrcate",
-				"Gesti� recaptacions" }));
+				"Gestió màquina", "Gestió reparacions", "Gestió contrcate",
+				"Gestió recaptacions" }));
 		comboBox.setSelectedIndex(0);
 		comboBox.setBounds(106, 78, 218, 20);
 		contentPane.add(comboBox);
@@ -76,10 +75,15 @@ public class PantallaPrincipal extends JFrame {
 				contracte.setVisible(true);
 				this.dispose();
 			} else {
-				if(comboBox.getSelectedIndex() == 1){
+				if (comboBox.getSelectedIndex() == 1) {
 					GestioReparacio reparacio = new GestioReparacio();
 					reparacio.setVisible(true);
 					this.dispose();
+				} else {
+					SeleccioMaquinaRecaptacio seleccionar = new SeleccioMaquinaRecaptacio();
+					seleccionar.setVisible(true);
+					this.dispose();
+				}
 			}
 		}
 
