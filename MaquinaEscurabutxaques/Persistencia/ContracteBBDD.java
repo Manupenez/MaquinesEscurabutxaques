@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import Domini.Contracte;
-
+//METODE BORRAT
 public class ContracteBBDD {
 
 	private ConnexioBBDD connexio;
@@ -151,22 +151,4 @@ public class ContracteBBDD {
 			throw new Exception("Error inserirContracte - " + e.getMessage());
 		}
 	}
-
-	public int getIdContracte(String idComerc) throws Exception {
-		try {
-			PreparedStatement pst = connexio
-					.prepareStatement("SELECT idContracte FROM Contracte WHERE idComerc = ?");
-			pst.clearParameters();
-			pst.setString(1, idComerc);
-			ResultSet rs = pst.executeQuery();
-			if (rs.next()) {
-				return rs.getInt("idContracte");
-			} else {
-				return -1;
-			}
-		} catch (Exception e) {
-			throw new Exception("Error getIdContracte - " + e.getMessage());
-		}
-	}
-
 }

@@ -55,12 +55,16 @@ public class NovaRecaptacio extends JFrame {
 		JButton btnAcceptar = new JButton("Acceptar");
 		btnAcceptar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try{
 				if(!dinersMaquina.getText().equals("")){
 					int idcontracte = controladorContracte.recuperarIdContracteMaquina(idMaquina);
 					controladorRecaptacio.crearInformeRecaptacio(idMaquina, idcontracte, Integer.parseInt(dinersMaquina.getText()));
 					
 				}else{
 					tirarError("Introdueixi un valor");
+				}
+				}catch(Exception e){
+					tirarError(e.getMessage());
 				}
 			}
 		});

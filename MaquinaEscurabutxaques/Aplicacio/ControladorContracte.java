@@ -182,5 +182,9 @@ public class ControladorContracte {
 		LinkedList<Integer> id = maquinaBBDD.obtenirMaquinesXComerc(contracte.getComerc());
 		return id;
 	}
+//Metode nou
+	public int recuperarIdContracteMaquina(int idMaquina) throws Exception{
+		return this.contracteBBDD.recuperarIdContracteMaquina(idMaquina);
+	}
 
 }

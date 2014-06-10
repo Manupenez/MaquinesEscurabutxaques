@@ -70,4 +70,21 @@ public class LineaContracteBBDD {
 		}
 		
 	}
-	}
+	//metode nou
+		public int recuperarIdContracteMaquina(int idMaquina) throws Exception {
+			try {
+				PreparedStatement pst = connexio
+						.prepareStatement("SELECT idContracte FROM LineaContracte WHERE idMaquina = ? AND dataBaixa IS NULL");
+				pst.clearParameters();
+				pst.setInt(1, idMaquina);
+				ResultSet rs = pst.executeQuery();
+				if (rs.next()) {
+					return rs.getInt("idContracte");
+				} else {
+					return -1;
+				}
+			} catch (Exception e) {
+				throw new Exception("Error getIdContracte - " + e.getMessage());
+			}
+		}
+}
