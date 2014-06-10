@@ -28,7 +28,7 @@ public class ControladorContracte {
 	}
 
 	/**
-	 * Retorna el contracte del comerç passat per paràmetre
+	 * Retorna el contracte del comerï¿½ passat per parï¿½metre
 	 * 
 	 * @param idComerc
 	 * @return Contracte
@@ -48,7 +48,7 @@ public class ControladorContracte {
 	// afegir a LC maquines,etc.
 	/**
 	 * Posa data baixa al contracte anterior i en crea un de nou amb la
-	 * informació modificada.
+	 * informaciï¿½ modificada.
 	 * 
 	 * @param idComerc
 	 * @param info
@@ -70,7 +70,7 @@ public class ControladorContracte {
 
 	/**
 	 * Posa la data de baixa d'un contracte com a la data actual, elimina les
-	 * lineas de contracte i posa l'estat de les màquines a lliure.
+	 * lineas de contracte i posa l'estat de les mï¿½quines a lliure.
 	 * 
 	 * @param id
 	 * @throws Exception
@@ -94,7 +94,7 @@ public class ControladorContracte {
 		}
 	}
 
-	/** Retorna els comerços que no tenen cap contracte vigent.
+	/** Retorna els comerï¿½os que no tenen cap contracte vigent.
 	 * @return LinkedList<Integer>
 	 * @throws Exception
 	 */
@@ -107,7 +107,7 @@ public class ControladorContracte {
 		}
 	}
 
-	/** Retorna les màquines que com a estat el que li passen per paràmetre. 
+	/** Retorna les mï¿½quines que com a estat el que li passen per parï¿½metre. 
 	 * @param estat
 	 * @return LinkedList<Integer>
 	 * @throws Exception
@@ -122,7 +122,7 @@ public class ControladorContracte {
 		}
 	}
 
-	/** Crea un contracte amb la informació passada per paràmetres, retorna la ID del contracte.
+	/** Crea un contracte amb la informaciï¿½ passada per parï¿½metres, retorna la ID del contracte.
 	 * @param idComerc
 	 * @param info
 	 * @param idmaquines
@@ -150,7 +150,7 @@ public class ControladorContracte {
 		}
 	}
 
-	/** Retorna els comerços que tenen contractes vigents.
+	/** Retorna els comerï¿½os que tenen contractes vigents.
 	 * @return LinkedList<Integer>
 	 * @throws Exception
 	 */
@@ -162,9 +162,9 @@ public class ControladorContracte {
 		}
 	}
 
-	/** Retorna el tipus del comerç que se li ha passat per paràmetre.
+	/** Retorna el tipus del comerï¿½ que se li ha passat per parï¿½metre.
 	 * @param idComerc
-	 * @return Tipus del comerç
+	 * @return Tipus del comerï¿½
 	 * @throws Exception
 	 */
 	public String mirarTipusComerc(int idComerc) throws Exception {
@@ -176,6 +176,11 @@ public class ControladorContracte {
 			throw new Exception("Error mirarTipusComerc - " + e.getMessage());
 		}
 
+	}
+	
+	public LinkedList<Integer> maquinesDelContracte(Contracte contracte) throws Exception {
+		LinkedList<Integer> id = maquinaBBDD.obtenirMaquinesXComerc(contracte.getComerc());
+		return id;
 	}
 
 }
