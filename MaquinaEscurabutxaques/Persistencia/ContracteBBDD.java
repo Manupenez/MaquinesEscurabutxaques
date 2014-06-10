@@ -3,7 +3,6 @@ package Persistencia;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.LinkedList;
 
 import Domini.Contracte;
 
@@ -18,19 +17,33 @@ public class ContracteBBDD {
 	public void tancarConnexio() throws Exception {
 		connexio.close();
 	}
-	
+
 	public Contracte recuperarContracte(int idContracte) throws Exception {
 		try {
 			PreparedStatement pst = connexio
-					.prepareStatement("SELECT infocontracte, dataalta, idcontracte FROM Contracte WHERE idContracte = ?");
+					.prepareStatement("SELECT * FROM contracte WHERE idContracte = ?");
 			pst.clearParameters();
 			pst.setInt(1, idContracte);
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
+				double pagament, percentatge;
+
+				pagament = rs.getDouble("pagament");
+				if (rs.wasNull()) {
+					pagament = -1;
+				}
+
+				percentatge = rs.getDouble("percentatge");
+				if (rs.wasNull()) {
+					percentatge = -1;
+				}
+
 				ComercBBDD comercBBDD = new ComercBBDD();
-				
-				return new Contracte(rs.getString("infocontracte"),
-						rs.getDate("dataalta"),rs.getDate("databaixa"),rs.getDouble("percentatge"),rs.getDouble("pagament"),comercBBDD.recuperarComerc(rs.getInt("idcomerc")),rs.getInt("idContracte"));
+
+				return new Contracte(rs.getString("infoContracte"),
+						rs.getDate("dataAlta"), rs.getDate("dataBaixa"),
+						percentatge, pagament, comercBBDD.recuperarComerc(rs
+								.getInt("idComerc")), rs.getInt("idContracte"));
 			}
 			return null;
 		} catch (Exception e) {
@@ -41,19 +54,34 @@ public class ContracteBBDD {
 	public Contracte recuperarContracteComerc(int idComerc) throws Exception {
 		try {
 			PreparedStatement pst = connexio
-					.prepareStatement("SELECT infocontracte, dataalta, idcontracte FROM Contracte WHERE idComerc = ? AND databaixa IS NULL");
+					.prepareStatement("SELECT infocontracte, dataalta, idcontracte, percentatge, databaixa, pagament FROM Contracte WHERE idComerc = ? AND databaixa IS NULL");
 			pst.clearParameters();
 			pst.setInt(1, idComerc);
 			ResultSet rs = pst.executeQuery();
 			if (rs.next()) {
+				double pagament, percentatge;
+
+				pagament = rs.getDouble("pagament");
+				if (rs.wasNull()) {
+					pagament = -1;
+				}
+
+				percentatge = rs.getDouble("percentatge");
+				if (rs.wasNull()) {
+					percentatge = -1;
+				}
 				ComercBBDD comercBBDD = new ComercBBDD();
-				
+
 				return new Contracte(rs.getString("infocontracte"),
-						rs.getDate("dataalta"),rs.getDate("databaixa"),rs.getDouble("percentatge"),rs.getDouble("pagament"),comercBBDD.recuperarComerc(rs.getInt("idcomerc")),rs.getInt("idContracte"));
+						rs.getDate("dataalta"), rs.getDate("databaixa"),
+						percentatge, pagament,
+						comercBBDD.recuperarComerc(idComerc),
+						rs.getInt("idcontracte"));
 			}
 			return null;
 		} catch (Exception e) {
-			throw new Exception("Error recuperarContracteComerc - " + e.getMessage());
+			throw new Exception("Error recuperarContracteComerc - "
+					+ e.getMessage());
 		}
 	}
 
@@ -92,10 +120,10 @@ public class ContracteBBDD {
 		try {
 			PreparedStatement pst;
 			String sql;
-			if(contracte.getPagament()==-1){
+			if (contracte.getPagament() == -1) {
 				sql = "INSERT INTO Contracte(idcontracte, infocontracte, dataalta, idcomerc, percentatge) VALUES(?,?,?,?,?)";
-				
-			}else{
+
+			} else {
 				sql = "INSERT INTO Contracte(idcontracte, infocontracte, dataalta, idcomerc, pagament) VALUES(?,?,?,?,?)";
 			}
 			pst = connexio.prepareStatement(sql);
@@ -111,11 +139,11 @@ public class ContracteBBDD {
 			long data = contracte.getDataAlta().getTime();
 			pst.setDate(3, new Date(data));
 			pst.setInt(4, idComerc);
-			if(contracte.getPagament()==-1){
-				pst.setDouble(5, contracte.getPercentatge());				
-			}else{
+			if (contracte.getPagament() == -1) {
+				pst.setDouble(5, contracte.getPercentatge());
+			} else {
 				pst.setDouble(5, contracte.getPagament());
-			}			
+			}
 			if (pst.executeUpdate() != 1) {
 				throw new Exception("Contracte inserit incorrectament");
 			}
@@ -140,4 +168,5 @@ public class ContracteBBDD {
 			throw new Exception("Error getIdContracte - " + e.getMessage());
 		}
 	}
+
 }
