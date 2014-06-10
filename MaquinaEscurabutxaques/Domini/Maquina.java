@@ -12,7 +12,7 @@ public class Maquina {
 	private static final String llesta="LLESTA";
 	private static final String tornarMuntar="TORNAR A MUNTAR";
 	private static final String espatllada="ESPATLLADA";
-	private static final String enUnComerc="EN UN COMER�";
+	private static final String enUnComerc="EN UN COMERÇ";
 	
 	//Constructor bàsic de màquina
 	public Maquina(Carcassa carcassa, Placa placa, Tecnic tecnic){
@@ -92,6 +92,10 @@ public class Maquina {
 	
 	public void setEstatEnUnComerc(){
 		this.estat = this.enUnComerc;
+	}
+
+	public void setEstatEspatllada() {
+		this.estat = this.espatllada;
 	}
 		
 }
