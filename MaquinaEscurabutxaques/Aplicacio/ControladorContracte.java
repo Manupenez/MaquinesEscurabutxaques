@@ -57,12 +57,12 @@ public class ControladorContracte {
 	 * @param pagament
 	 * @throws Exception
 	 */
-	public void modificarContracte(int idComerc, String info,
+	public void modificarContracte(Contracte contracte, String info,
 			LinkedList<Integer> idmaquines, double percentatge, double pagament)
 			throws Exception {
 		try {
-			this.baixaContracte(this.aconseguirContracte(idComerc).getId());
-			this.nouContracte(idComerc, info, idmaquines, percentatge, pagament);
+			this.baixaContracte(contracte.getComerc().getId());
+			this.nouContracte(contracte.getComerc().getId(), info, idmaquines, percentatge, pagament);
 		} catch (Exception e) {
 			throw new Exception("Error modificarContracte - " + e.getMessage());
 		}
@@ -112,10 +112,10 @@ public class ControladorContracte {
 	 * @return LinkedList<Integer>
 	 * @throws Exception
 	 */
-	public LinkedList<Integer> obtenirMaquinesLlestes(String estat)
+	public LinkedList<Integer> obtenirMaquinesLlestes()
 			throws Exception {
 		try {
-			return this.maquinaBBDD.obtenirMaquines(estat);
+			return this.maquinaBBDD.obtenirMaquines("LLESTA");
 		} catch (Exception e) {
 			throw new Exception("Error obtenirMaquinesLlestes - "
 					+ e.getMessage());
@@ -177,7 +177,7 @@ public class ControladorContracte {
 		}
 
 	}
-	
+
 	public LinkedList<Integer> maquinesDelContracte(Contracte contracte) throws Exception {
 		LinkedList<Integer> id = maquinaBBDD.obtenirMaquinesXComerc(contracte.getComerc());
 		return id;

@@ -69,18 +69,18 @@ public class NovaReparacio extends JFrame {
 
 	private void omplirPantalla() {
 		LinkedList<Integer> comercos;
-		
-		try{
+
+		try {
 			comercos = controladorContracte.comercAmbContracte();
 			modelClients = new DefaultListModel();
-			for(Integer client : comercos){
+			for (Integer client : comercos) {
 				modelClients.addElement(client);
 			}
 			listClients = new JList(modelClients);
 			listClients.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			listClients.setBounds(25, 54, 146, 165);
 			contentPane.add(listClients);
-		}catch(Exception e){
+		} catch (Exception e) {
 			tirarError("No hi ha cap comerç amb contracte");
 		}
 
@@ -101,11 +101,20 @@ public class NovaReparacio extends JFrame {
 					try {
 						for (Object maquina : listMaquines
 								.getSelectedValuesList()) {
-							controladorReparador.inserirReparacio(Integer
-									.parseInt(String.valueOf(maquina)), Integer
-									.parseInt(String.valueOf(listClients
+							String retorn = controladorReparador.inserirReparacio(
+									Integer.parseInt(String.valueOf(maquina)),
+									Integer.parseInt(String.valueOf(listClients
 											.getSelectedValue())));
+							JOptionPane
+									.showMessageDialog(
+											new JFrame(),
+											retorn
+													+ " és l'encarregat de dur a terme la reparació",
+											"Reparació Creada",
+											JOptionPane.PLAIN_MESSAGE);
 						}
+
+						tornarEnrere();
 					} catch (Exception e1) {
 						tirarError(e1.getMessage());
 					}
@@ -129,8 +138,9 @@ public class NovaReparacio extends JFrame {
 								.parseInt(String.valueOf(listClients
 										.getSelectedValue())));
 						modelMaquines = new DefaultListModel();
-						for(Integer maquina : maquines){
-							modelMaquines.addElement(Integer.parseInt(String.valueOf(maquina)));
+						for (Integer maquina : maquines) {
+							modelMaquines.addElement(Integer.parseInt(String
+									.valueOf(maquina)));
 						}
 						listMaquines = new JList(modelMaquines);
 						listMaquines.setBounds(208, 54, 146, 165);
