@@ -16,9 +16,6 @@ import java.util.List;
 
  */
 
-
-
-
 import Domini.Carcassa;
 import Domini.Comerc;
 import Domini.Maquina;
@@ -194,7 +191,7 @@ public class MaquinaBBDD {
 					.prepareStatement("UPDATE Maquina SET idtecnicRevisar = ?, estatMaquina = ? WHERE idMaquina = ?");
 			pst.clearParameters();
 			pst.setInt(1, maquina.getIdTecnicRevisar());
-			pst.setString(2,maquina.getEstat());
+			pst.setString(2, maquina.getEstat());
 			pst.setInt(3, maquina.getId());
 			ResultSet rs = pst.executeQuery();
 		} catch (Exception e) {
@@ -207,8 +204,8 @@ public class MaquinaBBDD {
 	public Maquina recuperarMaquina(int id) throws Exception {
 		try {
 			Placa placa = placaBBDD.recuperarPlaca(this.getPlaca(id));
-			Carcassa carcassa = carcassaBBDD
-					.recuperarCarcassa(this.getCarcassa(id));
+			Carcassa carcassa = carcassaBBDD.recuperarCarcassa(this
+					.getCarcassa(id));
 			Tecnic tecnicMuntar = tecnicBBDD.recuperarTecnic(this
 					.getTecnicMuntar(id));
 			Tecnic tecnicRevisar = tecnicBBDD.recuperarTecnic(this
@@ -244,27 +241,45 @@ public class MaquinaBBDD {
 		}
 	}
 
-	public LinkedList<Integer> obtenirMaquinesXComerc(Comerc comerc) throws Exception {
-		try{
-			String sql =("select m.idmaquina from maquina m "
+	public LinkedList<Integer> obtenirMaquinesXComerc(Comerc comerc)
+			throws Exception {
+		try {
+			String sql = ("select m.idmaquina from maquina m "
 					+ "join lineacontracte lc on (m.idmaquina = lc.idmaquina) "
 					+ "join contracte c on (c.idcontracte = lc.idcontracte) "
 					+ "where c.idcomerc = ? and lc.dataBaixa is null and m.estatmaquina = 'EN UN COMERÇ'");
-		LinkedList<Integer> maquines = new LinkedList<Integer>();
-		PreparedStatement pstm;
-		ResultSet rs;
-		pstm = connexio.prepareStatement(sql);
-		pstm.clearParameters();
-		pstm.setInt(1, comerc.getId());
-		rs = pstm.executeQuery();
-		while (rs.next()) {
-			maquines.add(rs.getInt("idmaquina"));
-		}
-		return maquines;
-		}
-		catch(Exception e){
-			throw new Exception("Error obtenir màquines per comerç - "+e.getMessage());
+			LinkedList<Integer> maquines = new LinkedList<Integer>();
+			PreparedStatement pstm;
+			ResultSet rs;
+			pstm = connexio.prepareStatement(sql);
+			pstm.clearParameters();
+			pstm.setInt(1, comerc.getId());
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				maquines.add(rs.getInt("idmaquina"));
+			}
+			return maquines;
+		} catch (Exception e) {
+			throw new Exception("Error obtenir màquines per comerç - "
+					+ e.getMessage());
 		}
 	}
 
+	public LinkedList<Integer> obtenirMaquines() throws Exception {
+		try {
+			String sql = "SELECT idmaquina FROM Maquina";
+			LinkedList<Integer> maquines = new LinkedList<Integer>();
+			PreparedStatement pstm;
+			ResultSet rs;
+			pstm = connexio.prepareStatement(sql);
+			pstm.clearParameters();
+			rs = pstm.executeQuery();
+			while (rs.next()) {
+				maquines.add(rs.getInt("idmaquina"));
+			}
+			return maquines;
+		} catch (Exception e) {
+			throw new Exception("Error obtenirMaquines - " + e.getMessage());
+		}
+	}
 }
