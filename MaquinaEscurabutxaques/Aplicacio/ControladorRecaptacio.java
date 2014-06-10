@@ -23,7 +23,7 @@ public class ControladorRecaptacio {
 		this.contracteBBDD = new ContracteBBDD ();
 	}
 	
-	/** Mètode que genera un informe i l'introdueix a BBDD.
+	/** Mï¿½tode que genera un informe i l'introdueix a BBDD.
 	 * @param idmaquina
 	 * @param idcontracte
 	 * @param dinersMaquina
@@ -32,7 +32,7 @@ public class ControladorRecaptacio {
 	public void crearInformeRecaptacio(int idmaquina, int idcontracte, int dinersMaquina) throws Exception{
 		try{
 		Maquina maquina = maquinaBBDD.recuperarMaquina(idmaquina);
-		Contracte contracte = contracteBBDD.recuperarContracteActual(idcontracte);		
+		Contracte contracte = contracteBBDD.recuperarContracteComerc(idcontracte);		
 		Recaptacio recaptacio = new Recaptacio(maquina, contracte, dinersMaquina);	
 		this.recaptacioBBDD.inserirRecaptacio(recaptacio);
 		}catch (Exception e) {
@@ -40,9 +40,9 @@ public class ControladorRecaptacio {
 		}
 	}
 	
-	/** Mètode que retorna l'objecte Recaptació amb l'id que es passa per paràmetre.
+	/** Mï¿½tode que retorna l'objecte Recaptaciï¿½ amb l'id que es passa per parï¿½metre.
 	 * @param idrecaptacio
-	 * @return Recaptació
+	 * @return Recaptaciï¿½
 	 */
 	public Recaptacio recuperarRecaptacio(int idRecaptacio)throws Exception{
 		try{
@@ -60,7 +60,7 @@ public class ControladorRecaptacio {
 				throw new Exception("recuperarRecaptacioDATA "+e.getMessage());
 			}
 		}else{
-			throw new Exception("El valor pasat per parametre data no és tipus DATE");
+			throw new Exception("El valor pasat per parametre data no ï¿½s tipus DATE");
 		}
 	}
 	public LinkedList <Date> getDatesRecaptacioMaquina(int idMaquina){
