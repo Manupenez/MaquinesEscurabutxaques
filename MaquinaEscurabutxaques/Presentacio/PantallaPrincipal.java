@@ -9,7 +9,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -38,7 +37,7 @@ public class PantallaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public PantallaPrincipal() {
-		setTitle("M�quina Escurabutxaques");
+		setTitle("Màquina Escurabutxaques");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -75,13 +74,9 @@ public class PantallaPrincipal extends JFrame {
 				contracte.setVisible(true);
 				this.dispose();
 			} else {
-				if (comboBox.getSelectedIndex() == 1) {
+				if(comboBox.getSelectedIndex() == 1){
 					GestioReparacio reparacio = new GestioReparacio();
 					reparacio.setVisible(true);
-					this.dispose();
-				} else {
-					SeleccioMaquinaRecaptacio seleccionar = new SeleccioMaquinaRecaptacio();
-					seleccionar.setVisible(true);
 					this.dispose();
 				}
 			}
