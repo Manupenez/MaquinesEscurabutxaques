@@ -32,7 +32,7 @@ public class ControladorRecaptacio {
 	public void crearInformeRecaptacio(int idmaquina, int idcontracte, int dinersMaquina) throws Exception{
 		try{
 		Maquina maquina = maquinaBBDD.recuperarMaquina(idmaquina);
-		Contracte contracte = contracteBBDD.recuperarContracteActual(idcontracte);		
+		Contracte contracte = contracteBBDD.recuperarContracteComerc(idcontracte);		
 		Recaptacio recaptacio = new Recaptacio(maquina, contracte, dinersMaquina);	
 		this.recaptacioBBDD.inserirRecaptacio(recaptacio);
 		}catch (Exception e) {
@@ -55,7 +55,7 @@ public class ControladorRecaptacio {
 	public double recuperarRecaptacio(Date data, int idmaquina) throws Exception {
 		if( data instanceof Date){
 			try{
-			return this.recaptacioBBDD.recuperarDinersRecaptacio(data,idmaquina);
+			return this.recaptacioBBDD.recuperarDinersRecaptacio(data, idmaquina);
 			}catch(Exception e){
 				throw new Exception("recuperarRecaptacioDATA "+e.getMessage());
 			}
