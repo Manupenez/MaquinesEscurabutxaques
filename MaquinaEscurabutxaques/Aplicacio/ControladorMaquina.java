@@ -7,7 +7,7 @@ import Domini.Maquina;
 import Domini.Placa;
 import Domini.Tecnic;
 import Persistencia.*;
-//he afegit un metode obtenirMaquines()
+
 public class ControladorMaquina {
 
 	private Maquina maquina;
@@ -23,7 +23,7 @@ public class ControladorMaquina {
 		carcassaBBDD = new CarcassaBBDD();
 	}
 
-	/**Mètode que genera una llista de les id dels tècnics que poden muntar una màquina.
+	/**Mï¿½tode que genera una llista de les id dels tï¿½cnics que poden muntar una mï¿½quina.
 	 * @return
 	 * @throws Exception
 	 */
@@ -35,7 +35,7 @@ public class ControladorMaquina {
 		}
 	}
 
-	/**Mètode que genera una llista de les id de les plaques que no estan ocupades i es poden utilitzar
+	/**Mï¿½tode que genera una llista de les id de les plaques que no estan ocupades i es poden utilitzar
 	 * @return
 	 * @throws Exception
 	 */
@@ -48,7 +48,7 @@ public class ControladorMaquina {
 		}
 	}
 
-	/**	Mètode que genera una llista de les id de les carcasses que no estan ocupades i es poden utilitzar
+	/**	Mï¿½tode que genera una llista de les id de les carcasses que no estan ocupades i es poden utilitzar
 	 * @return
 	 * @throws Exception
 	 */
@@ -61,7 +61,7 @@ public class ControladorMaquina {
 		}
 	}
 
-	/**Mètode que recupera de la base de dades la informació necessària per a crear una màquina
+	/**Mï¿½tode que recupera de la base de dades la informaciï¿½ necessï¿½ria per a crear una mï¿½quina
 	 * @param idTecnic
 	 * @param idPlaca
 	 * @param idCarcassa
@@ -130,7 +130,7 @@ public class ControladorMaquina {
 		}
 	}
 
-	/**Mètode que rebent l'id de la màquina que es vol tornar a muntar la torna a muntar i deixa pendent de revisar
+	/**Mï¿½tode que rebent l'id de la mï¿½quina que es vol tornar a muntar la torna a muntar i deixa pendent de revisar
 	 * @param idMaquina
 	 * @throws Exception
 	 */
@@ -147,7 +147,7 @@ public class ControladorMaquina {
 	}
 
 
-	/**Mètode que, segons el que ha decidit el tècnic amb l'id passat com a parametre, canvia l'estat de la màquina
+	/**Mï¿½tode que, segons el que ha decidit el tï¿½cnic amb l'id passat com a parametre, canvia l'estat de la mï¿½quina
 	 * (idMaquina) a pendent de tornar a ser muntada(false) o llesta (true)
 	 * @param idTecnic
 	 * @param idMaquina
@@ -168,6 +168,8 @@ public class ControladorMaquina {
 			throw new Exception("Error canviarEstatOK - " + e.getMessage());
 		}
 	}
+
+
 //obtenim totes les idmaquines de la BBDD
 	public LinkedList<Integer> obtenirMaquines() throws Exception{
 		try {
