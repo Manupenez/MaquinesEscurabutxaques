@@ -1,5 +1,5 @@
 package Aplicacio;
-
+//
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -15,10 +15,12 @@ public class ControladorReparador {
 
 	private MaquinaBBDD maquinaBBDD;
 	private ReparacioBBDD reparacioBBDD;
+	private ComercBBDD comercBBDD;
 	
 	public ControladorReparador() throws Exception{
 		this.maquinaBBDD = new MaquinaBBDD();
-		this.reparacioBBDD = new ReparacioBBDD ();
+		this.reparacioBBDD = new ReparacioBBDD();
+		this.comercBBDD = new ComercBBDD();
 	}
 	
 	/** Retorna les màquines que tenen com a estat "ESPATLLADA"
@@ -89,20 +91,23 @@ public class ControladorReparador {
 	
 	/** Insereix una reparació a la BBDD
 	 * @param idMaquina
-	 * @param comerc
+	 * @param idComerc
 	 * @throws Exception
 	 */
-	public void inserirReparacio(int idMaquina, Comerc comerc) throws Exception{
+	public String inserirReparacio(int idMaquina, int idComerc) throws Exception{
 		try{
 		Maquina maquina= maquinaBBDD.recuperarMaquina(idMaquina);	
 		Date data= new Date();
 		TecnicBBDD tecnicBBDD=  new TecnicBBDD();
+		Comerc comerc = comercBBDD.recuperarComerc(idComerc);
 		Tecnic tecnic = tecnicBBDD.getTecnicMenysReparacionsZona(comerc.getZona());
-
 		Reparacio reparacio = new Reparacio(maquina,tecnic,data);
 		this.reparacioBBDD.inserirReparacio(reparacio);
+		maquina.setEstatEspatllada();
+		maquinaBBDD.modificarEstat(maquina);
+		return tecnic.toString();
 		}catch(Exception e){
-			throw new Exception ("Error inserirReparacio: "+e.getMessage());
+			throw new Exception ("Error inserirReparacio Controlador: "+e.getMessage());
 		}
 	}
 
@@ -112,10 +117,7 @@ public class ControladorReparador {
 	 * @throws Exception 
 	 */
 	public LinkedList<Integer> obtenirMaquinesComerc(int idComerc) throws Exception {
-
-		ComercBBDD comercBBDD = new ComercBBDD();
 		LinkedList<Integer> id = maquinaBBDD.obtenirMaquinesXComerc(comercBBDD.recuperarComerc(idComerc));
-
 		return id;
 	}
 	
